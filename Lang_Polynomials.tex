@@ -1,0 +1,404 @@
+\documentclass{article}
+\usepackage[margin=0.5in]{geometry}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{chngcntr}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{cancel}
+\usepackage{tikz}
+%\usepackage[dvipsnames]{xcolor}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\verteq}{\rotatebox{90}{$\,=$}}
+\newcommand{\equalto}[2]{\underset{\scriptstyle\overset{\mkern4mu\verteq}{#2}}{#1}}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}[theorem] 
+\newtheorem{lemma}[theorem]{Lemma} 
+\newtheorem{proposition}{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{example}{Example}[definition]
+\newcounter{exercise}[subsection]
+\newenvironment{exercise}{\setcounter{equation}{0}\refstepcounter{exercise}\textbf{Exercise~\theexercise}}{}
+\counterwithin*{equation}{section}
+\counterwithin*{equation}{subsection}
+
+
+\title{}
+\author{}
+\date{}
+\begin{document}
+    \begin{exercise} \textbf{Let }$k$\textbf{ be a field and }$f(x)\in k[x]\setminus\{0\}$.\textbf{TFAE:}\begin{enumerate}[label={(\alph*)}]
+        \item \textbf{The ideal }$(f(x))$\textbf{ is prime}
+        \item $(f(x))$ \textbf{ is maximal}
+        \item $f(x)$ \textbf{ is irreducible}
+    \end{enumerate}
+        \begin{proof}
+            \begin{itemize}
+                \item $((a)\Rightarrow (c))$
+                
+                Let $(f(x))$ be prime, therefore $k[x]/(f(x))$ is an integral domain.
+                So assume that: \begin{equation}
+                    f(x) = g(x)h(x), \text{ for some }g,h\in k[x]
+                \end{equation}
+                \begin{equation}
+                    \Rightarrow 0 = (g(x)+(f(x)))(h(x)+(f(x)))
+                \end{equation}
+
+                Since $k[x]/(f(x))$ is entire, this implies that on of these factors is zero. WLOG assume that:
+                \begin{equation}
+                    g(x)+(f(x)) = 0 \Rightarrow g(x)\in (f(x))
+                \end{equation}
+
+                $\therefore g(x) = c(x)f(x)$, for some $c(x)\in k[x]$. But since:\begin{equation}
+                    f(x) = g(x)h(x) = c(x)h(x)f(x) \Rightarrow f(x)(1-c(x)h(x)) = 0
+                \end{equation}
+                So by the fact that $k[x]$ is a PID $c(x)h(x)=1$, so we have $c(x),h(x)\in {k[x]}^\ast=k$. Since this is true for any arbitrary factors, 
+             we indeed see that $f$ is irreducible.
+              
+                \item $((c)\Rightarrow (b))$
+                
+                Let $f(x)$ be irreducible and let $g(x)\notin (f(x))$. Since $k[x]$ is a PID, there exists $h\in k[x]$ such that:\begin{equation}
+                    (f(x),g(x)) = (h(x))
+                \end{equation}
+
+                 \[\therefore\begin{cases}
+                    &f(x) = h(x)q(x) \text{ for some }q\in k[x]\\
+                    &g(x) = h(x)p(x) \text{ for some }p\in k[x]
+                \end{cases}\]
+
+                Since we have that $f$ is irreducible we have two cases:
+                $h(x) \in k={k[x]}^\ast$, or $h(x) = af(x)$ for some $a\in k$.
+
+                But notice that the second case is impossible since it would imply that $g(x) = af(x)p(x)\in (f(x))$.
+
+                So we then see that $(h(x)) = (1) = k[x]$.
+
+                But this argument tells us that any ideal, $\mathcal{I}$, that properly contains $(f(x))$ will contain an element $g(x)\notin (f(x))$, so \begin{equation}
+                    k[x] = (f(x),g(x)) \subseteq \mathcal{I}\subseteq k[x] \Rightarrow \mathcal{I}=k[x]
+                \end{equation}
+So $(f(x))$ is indeed maximal.
+
+\item $((b)\Rightarrow (a))$
+
+Recall, by theorem it was already shown in this textbook that all maximal ideals are prime.
+            \end{itemize}
+        \end{proof}
+
+\begin{remark}
+    I don't really understand why this question is in the polynomial section, since this fact is true for any $PID$.
+\end{remark}
+    \end{exercise}
+
+    \begin{exercise}
+        
+    \end{exercise}
+
+
+    \begin{exercise}
+        \textbf{Let }$f\in k[x]$\textbf{, and }$x,y$\textbf{ be two variables; show that in }$k[x]$\textbf{ we have a ``Taylor series'' expression}
+        \begin{equation*}
+            f(x+y) = f(x) + \sum_{i=1}^n\varphi_i(x)y^i, \textbf{ where }\varphi_i\in k[x] \ \forall i
+        \end{equation*}
+    \textbf{Furthermore, if }$k$\textbf{ has character }$0$\textbf{ then: }\begin{equation*}
+        \varphi_i = \frac{D^i f(x)}{i!}
+    \end{equation*}  
+    
+    \begin{proof}
+        Let $a_i\in k$ be such that, $f(x) = \sum_{i=0}^n{a_i}x^i$, then we have
+        \begin{align}
+            f(x+y) &= \sum_{i=0}^n {a_i}{(x+y)}^i\\
+                   &= \sum_{i=0}^n a_i \sum_{k=0}^i \binom{i}{k}x^{i-k}y^k\\
+                   &= \sum_{i=0}^n ({a_i}x^i + a_i\sum_{k=1}^i \binom{i}{k}x^{i-k}y^k)\\
+                   &= \cancelto{f(x)}{\sum_{i=0}^n {a_i}x^i} + \sum_{i=1}^n \sum_{k=1}^i a_i\binom{i}{k}x^{i-k}y^k\\
+        \end{align}
+        Now note that by re-arraging terms we have: \begin{equation}
+            \sum_{i=1}^n \sum_{k=1}^i \binom{i}{k}x^{i-k}y^k = \sum_{k=1}^n \bigg(\sum_{i=k}^n a_i\binom{i}{k}x^{i-k}\bigg)y^k
+        \end{equation}
+
+        So if we let $\varphi_i(x) = \sum_{k=i}^n a_k\binom{k}{i}x^{k-i}$, we see that:\begin{equation}
+            f(x+y) = f(x) + \sum_{i=1}^n\varphi_i(x)y^i
+        \end{equation}
+
+        Now assume that $k$ has character $0$, we will inductively find a formula for ${D^i}f(x)$:\begin{itemize}
+            \item \begin{equation}D^1f(x) = D(\sum_{k=0}^n a_k x^k) = \sum_{k=1}^n (a_k\cdot k)x^{k-1}\end{equation}
+            \item If ${D^i}f(x) = \sum_{k=i}^n (a_k\cdot k(k-1)\cdots (k-i-1))x^{k-i}$, we have that \begin{equation}
+                D^{i+1}f(x) = D({D^i}f(x)) = D(\sum_{k=i}^n (a_k\cdot k(k-1)\cdots (k-i-1))x^{k-i}) = \sum_{k=i+1}^n (a_k\cdot k(k-1)\cdots (k-i-1)(k-i))x^{k-(i+1)}
+            \end{equation}
+
+            Therefore we see that for all $i$ we have ${D^i}f(x) = \sum_{k=i}^n (a_k\cdot k(k-1)\cdots (k-i-1))x^{k-i}$
+            Now since is a field $k$ of characteristic $0$, it contains a copy of $\Q$, so $\frac{1}{i!}g(x)$, for $g\in k[x]$ is well-defined for all $i\in \N$. Therefore:\begin{equation}
+                \frac{{D^i}f(x)}{i!} = \sum_{k=i}^n a_k\frac{k(k-1)\cdots (k-i-1)}{i!}x^{k-i} = \sum_{k=i}^n a_k\frac{k(k-1)\cdots (k-i-1)(k-i)\cdot 1}{i!(k-i)!}x^{k-i} = \sum_{k=i}^n a_k\binom{k}{i}x^{k-i} = \varphi_i(x)
+            \end{equation}
+        \end{itemize}
+    \end{proof}
+    \end{exercise}
+    \begin{exercise}
+        
+    \end{exercise}
+    \begin{exercise}\begin{enumerate}[label = (\alph*)]
+        \item$\mathbf{Show\ that\ x^4+1\ and\ x^6+x^3+1\ are\ irreducible\ in\ \Q}$
+        \item$\mathbf{Show\ that\ any\ polynomial\ of\ degree\ 3\ in\ any\ field\ is\ either\ irreducible\ or\ has\ a\ root.}$\\
+         $\mathbf{Is\ x^3-5x^2+1\ irreducible\ over\ \Q ?}$
+        \item $\mathbf{Show\ that\ x^2+y^2-1\ is\ irred\ over\ \Q.\ Is\ it\ irred\ over\ \C?}$
+    \end{enumerate}
+        \begin{enumerate}[label= (\alph*)]
+            \item \begin{proof}
+            Let $f(x) = x^4+1$ and $g(x) = x^6+x^3+1$. Note that:\begin{equation}
+                f(x+1) = {(x+1)}^4+1 = x^4+4x^3+6x^2+4x+2 
+            \end{equation}
+            Note since $2$ divides the coefficents of all $x^i$, for $i<4$ and $2^2 = 4\nmid 2$, by the Eisenstein criterion, $f(x+1)$ is irreducible, therefore since we have a clear automorphism $\Q[x]\rightarrow \Q[x]$ given by $x\rightarrow (x+1)$
+            we see that $f(x)$ is also irreducible.
+            
+            \
+
+            Likewise we see that \begin{equation}
+                g(x+1) = {(x+1)}^6+{(x+1)}^3+1 = x^6+6x^5+15x^4+21x^3+18x^2+9x+3
+            \end{equation}
+        Once again by the Eisenstein criterion with 3, $g(x+1)$ is irreducible so $f(x)$ is also irreducible. 
+        \end{proof}
+        \item Assume that $f(x)$ is a polynomial over a field $k$ that is not irreducible, so $\exists \ g,h\in k[x]$ of positive degree such that:\begin{equation}
+            f(x) = g(x)h(x) \Rightarrow 3 = \deg(f) = \deg(g)+\deg(h)
+        \end{equation} 
+        Since $\deg(g),\deg(h) >0$, this means that $\deg(g) = 1$ and $\deg(h) = 2$ or vice-versa. Since a linear polynomial divides $f$, it has a root in $k$.
+
+        \
+
+        Let $f(x) = x^3-5x^2+1\in\Q[x]$, assume that this polynomial has a root in $\Q$, say $p/q$, where $p,q\in \Z ,\ \gcd(p,q)=1$.
+
+        By the rational root theorem, we have that $p\mid 1$ and $q\mid 1$, therefore $p=\pm 1$ and $q=\pm 1$, so $p/q = 1$ or $p/q=-1$.
+
+        But notice that $f(1) = 1-5+1=-3\not= 0$ and $f(-1) = -1-5+1 = 5\not= 0$. So in all cases $f(p/q)\not=0$, which contradicts our assumption that $p/q$ was a root of $f$.
+
+        Therefore, $f(x)$ has no roots in $\Q$ and so it is irreducible.
+        
+        \item Let $f(x,y) = x^2+y^2-1$, we will show that this polynomial is irreducible over $\C$ which will imply it is also irreducible over $\Q$.
+    
+    Assume that $f$ is not irreducible, so there exists $g,h\in \C[x.y]$ with $\deg(g),\deg(h)>0$, such that $f=gh$.
+    
+    By comparing degrees we immediately see that $g,h$ are linear functions. Furthermore we can assume that the coefficent of $x$ in these two polynomials is $1$. Indeed since we have:\begin{align}
+        x^2+y^2-1 &= (ax+by+c)(dx+ey+f), \text{ by comparing coefficients }ad=1\\
+        \therefore x^2+y^2-1&= \cancelto{1}{ad}(x+\frac{b}{a}y+\frac{c}{a})(x+\frac{e}{d}y+\frac{f}{d})
+    \end{align}
+
+    So we let $\alpha,\beta,\gamma,\epsilon\in \C$ such that $g(x,y) = x+\alpha y+\beta$ and $h(x,y) = x+\gamma y+\epsilon$ and:\begin{align}
+        f(x,y) &= g(x,y)h(x,y)\\
+        x^2+y^2-1 &= (x+\alpha y+\beta)(x+\gamma y+\epsilon)\\
+        &= x^2 +(\alpha+\gamma)xy+(\alpha\gamma)y^2+(\epsilon+\beta)x+(\alpha\epsilon+\beta\gamma)y+\beta\epsilon
+    \end{align}
+    By comparing coefficents we see that:\[\begin{cases}
+        \alpha+\gamma = 0\\
+        \alpha\gamma = 1\\
+        \epsilon+\beta = 0\\
+        \alpha\epsilon + \beta\gamma = 0\\
+        \beta\epsilon = -1
+    \end{cases}\Rightarrow\begin{cases}
+        \alpha=-\gamma\\
+        \alpha^2 = -1 \Rightarrow \alpha \not= 0\\
+        \epsilon=-\beta\\
+        -\alpha\beta - \beta\alpha = 0 \Rightarrow \alpha\beta=0\\
+        \beta^2 = 1 \Rightarrow \beta \not= 0
+    \end{cases}\]
+
+    But we have $\alpha,\beta\not=0$ and $\alpha\beta=0$ which is impossible. Therefore $f(x,y)$ is irreducible over $\C$ and $\Q$.
+    \end{enumerate}
+    \end{exercise}
+
+    \
+
+    \textbf{Exercise 8. } $\mathbf{Let\ A\ be\ a\ commutative\ entire\ ring\ (integral\ domain)\ and\ X\ a\ variable\ over\ A.}$\\
+    $\mathbf{Let\ a,b\in A \ and\ assume\ that\ a\ is\ a\ unit \ in\ A. \ Show \ that\ the \ map \ x\rightarrow ax+b \ extends \ to\ a\ unique}$
+    \\ 
+    $\mathbf{automorphism \ of \ A[x] \ inducing \ the \ identity \ on \ A. \ What \ is \ the \ inverse \ automorphism?}$
+
+    \begin{proof}
+        Let $\varphi\colon \{x\}\subseteq A[x] \rightarrow A[x]$ be given by $\varphi(x) = (ax+b)$, and define $\bar\varphi\colon A[x]\rightarrow A[x]$ such that for all $f=\sum {a_i}x^i$:\begin{align}
+            \bar\varphi(f) = \bar\varphi(\sum_{i=0}^n {a_i}x^i) = \sum_{i=0}^n {a_i}{\varphi(x)}^i = \sum_{i=0}^n {a_i}{(ax+b)}^i = f(ax+b)
+        \end{align}
+
+    It is clear that this is a homomorphism, since we have \begin{align}\bar\varphi(\sum_{i=0}^n {a_i}x^i + \sum_{i=0}^n {b_i}x^i) &= \bar\varphi(\sum_{i=0}^n ({a_i} + {b_i})x^i)\\
+         &= \sum_{i=0}^n ({a_i} + {b_i}){\varphi(x)}^i\\
+         &= \sum_{i=0}^n {a_i}{\varphi(x)}^i + \sum_{i=0}^n {b_i}{\varphi(x)}^i\\
+         &= \bar\varphi(\sum_{i=0}^n {a_i}x^i) + \bar\varphi(\sum_{i=0}^n {b_i}x^i)
+        \end{align}
+And we have:\begin{align}
+    \bar\varphi(\sum_{i=0}^n {a_i}x^i\sum_{i=0}^n {b_i}x^i) &= \bar\varphi\bigg(\sum_{0\leq i,j\leq n} {a_i}{b_j}x^{i+j}\bigg)\\
+    &= \bar\varphi\bigg(\sum_{k=0}^n(\sum_{i=0}^k {a_i}b_{k-i}) x^k\bigg)\\
+    &= \sum_{k=0}^n(\sum_{i=0}^k{a_i}{b_{k-i}}){\varphi(x)}^k\\
+    &= \sum_{k=0}^n(\sum_{i=0}^k{a_i}{b_{k-i}}){(ax+b)}^k\\
+    &= (\sum_{i=0}^n{a_i}{(ax+b)}^i)(\sum_{j=0}^n{b_{j}}{(ax+b)}^{j})\\
+    &= \bar\varphi(\sum_{i=0}^n {a_i})\bar\varphi(\sum_{j=0}^n {a_i})
+\end{align}
+
+Finally this induces the identity on $A$ by definition, so $\bar\varphi(1) = 1$. Now if $f(x) = \sum_{i=0}^n{a_i}x^i\in \ker{\bar\varphi}$, then we have:\begin{align}
+    0 = \bar\varphi (\sum_{i=0}^n {a_i}x^i) &= \sum_{i=0}^n{a_i}{\varphi(x)}^i\\
+    &= \sum_{i=0}^n{a_i}{(ax+b)}^i\\
+    &= \sum_{i=0}^n\sum_{k=0}^i{a_i}\binom{i}{k}{a^k}b^{i-k}{x^k}\\
+    &= \sum_{i=0}^n({a^i}\sum_{k=i}^n{a_k}\binom{n}{k}b^{i-k})x^i
+\end{align}
+
+Therefore ${a^i}\sum_{k=i}^n{a_k}\binom{n}{k}b^{i-k} = 0$ for all $i$. But since $a\in A^\ast$, this means that $\sum_{k=i}^n{a_k}\binom{n}{k}b^{i-k} = 0 \ \forall i>0$.
+
+We have two cases\begin{enumerate}
+    \item If $b=0$, then $\sum_{k=i}^n{a_k}\binom{n}{k}b^{i-k} = a_i = 0$ for all $i$.
+    \item If $b\not=0$, and assume that $f\not=0$, let $i_0$ be the largest $i$ such that $a_{i} \not= 0$ then since: \begin{equation}0=\sum_{k=i_0}^n{a_k}\binom{n}{k}b^{i_0-k}=a_{i_0}\binom{n}{i_0} \Rightarrow a_{i_0}=0\end{equation}
+Which is a contradiction to our assumption. So $f=0$.
+\end{enumerate}
+
+So this function is indeed $1-1$. Now notice that \[\bar\varphi(a^{-1}(x-b)) = a^{-1}(\bar\varphi(x-b)) = a^{-1}(\bar\varphi(x)-\bar\varphi(b)) = a^{-1}(ax+b-b) = x\]
+By the fact that $\bar\varphi$ is a homomorphism, so for any $\sum {a_i}x^i\in A[x]$, we have:\begin{equation}
+    \bar\varphi(\sum {a_i}{(a^{-1}(x-b))}^i) = \sum {a_i}{\bar\varphi(a^{-1}(x-b))}^i = \sum a_i x^i 
+\end{equation}
+
+So this function is indeed onto, so $\bar\varphi$ is indeed an automorphism, inducing the identity on $A$. Furthermore, it is clearly the unique map extending $\varphi$ since for any other map $\tilde{\varphi}$ extending $\varphi$ we have:\begin{equation}
+    \bar\varphi(\sum {a_i}x^i) = \sum {a_i}{\bar\varphi(x)}^i = \sum {a_i}{\varphi(x)}^i = \sum {a_i}{\tilde\varphi(x)}^i = \tilde\varphi(\sum {a_i}{x}^i)
+\end{equation}
+
+\
+
+From this it is clear that $\bar\varphi^{-1}$, is the unique automorphism extending $x\rightarrow a^{-1}(x-b)$, inducing the identity of $A$.
+
+Indeed call this automorphism $\bar\psi$, we have:\begin{equation}
+    \bar\varphi\circ\bar\psi(\sum {a_i}x^i) = \sum {a_i} {(\bar\varphi\circ\bar\psi(x))}^i = \sum {a_i} {(\bar\varphi(a^{-1}(x-b)))}^i = \sum {a_i} {x}^i 
+\end{equation}
+    \end{proof}
+    \textbf{Exercise 9. }$\mathbf{Show\ that\ every\ automorphism\ of\ A[x]\ is\ of\ the\ type\ described\ in\ Ex \ 8.}$
+\begin{proof}
+\begin{remark}
+    Note, it is not written in my copy, but we need the automorphism to also induce the identity on $A$, since if not then the homomorphism $\phi\colon A[x][y] \rightarrow A[x][y]$, where $\phi(f(x,y)) = \phi(\sum f_i(x)y^i) = \sum f_i(y)x^i = f(y,x)$ is an automorphism but is not of the form in exercise 8.
+\end{remark}
+
+\
+
+Let $f=\sum {a_i}x^i$, be such that $\varphi(f) = x$, then we have:\begin{equation}
+    \varphi(f) = \sum_{i=0}^n{a_i}{\varphi(x)}^i = x
+\end{equation}
+
+Since we know that $\varphi(x)\not\in A$, we see that $\deg({\varphi(x)}^i)\geq i$. So by comparing degrees we see that $a_i=0$ for all $i>1$.
+
+So we have:\begin{equation}
+    a_0+a_1\varphi(x) = x
+\end{equation}
+
+Therefore we see that $\varphi(x)$ is linear, likewise we see that $\varphi^{-1}(x)$ is linear. So let $\varphi(x) = ax+b$ and $\varphi^{-1}=cx+d$ so we have:\begin{align}
+    x &= \varphi^{-1}(\varphi(x))\\
+    &= c\varphi(x)+d\\
+    &= c(ax+b)+d\\
+    &= cax+(cb+d)
+\end{align} 
+
+By comparing coeeficents we see that $ca = 1$, so $a$ is a unit. So we indeed see that $\varphi$ is of the form from Ex. 8. 
+\end{proof}
+
+
+\textbf{Exercise 11. }$\mathbf{Let\ A\ be \ a\ commutative\ entire\ ring\ and \ K\ be \ it's\ quotient\ field.\ Let\ D\colon A\rightarrow A, \ be \ a}$
+
+$\mathbf{derivation, \ an \ additive\ homomorphism\ s/t: \ D(xy) = xD(y)+yD(x)}$
+
+\begin{enumerate}[label={(\alph*)}]
+    \item \textbf{ Prove that }$D$\textbf{ has a unique extension to a derivation of }$K$\textbf{ into itself and this extension satisfies the rule}\begin{equation}
+        D(x/y) = \frac{yDx-xDy}{y^2}, \ \text{ for }x,y\in A\text{ and }y\neq 0
+    \end{equation}
+    \begin{proof}
+        We define $\bar D\colon K\rightarrow K$, by:\begin{equation}
+            \bar D(x/y) = \frac{yDx-xDy}{y^2}, \text{ for all }x,y\in A\text{ with }y\neq 0
+        \end{equation}
+
+        We will first show that this function is well-defined, let $\frac{x}{y}=\frac{z}{w} \iff xw=zy$, then we have:\begin{align}
+            \bar D(x/y) &= \frac{yDx-xDy}{y^2}\\
+            \bar D(z/w) &= \frac{wDz-zDw}{w^2}
+        \end{align}
+
+        We see that\begin{align}
+            w^2(yDx-xDy) &= w^2yDx-w^2xDy\\
+                         &= w^2yDx-wzyDy\\
+                         &= yw(wDx-zDy)\\
+                         &= yw(D(wx) - xD(w) - D(yz) + yDz) \text{ by the product rule on }D\\
+                         &= yw(yD(z)-xD(w)) \text{ since }xw=zy\\
+                         &= y^2wD(z) - ywxD(w)\\
+                         &= y^2wD(z) - y^2zD(w)\\
+                         &= y^2(wD(z)-zD(w))
+        \end{align}
+
+        Therefore $\bar D(x/y) = \bar D(z/w)$, this function is well-defined.
+
+        \
+
+        Now we will show that $\bar D$ is a derivation. Let $\frac{x}{y},\frac{z}{w}\in A$, not necessarly equal, we have:\begin{align}
+            \bar{D}\bigg(\frac{x}{y}+\frac{z}{w}\bigg) &= \bar{D}\bigg(\frac{xw+zy}{yw}\bigg)\\
+            &= \frac{ywD(xw+yz)-(xw+yz)D(yw)}{{(yw)}^2}\\
+            &= \frac{ywD(xw)+ywD(yz)-xwD(yw)-yzD(yw)}{{(yw)}^2}\\
+            &= \frac{yw(wDx+xDw)+yw(yDz+zDy)-xw(yDw+wDy)-yz(yDw+wDy)}{{(yw)}^2}\\
+            &= \frac{yw^2Dx+(ywz-xw^2-yzw)Dy+y^2wDz+(ywx-xwy-y^2z)Dw}{{(yw)}^2}\\
+            &= \frac{w^2(yDx-xDy)+y^2(wDz-zDw)}{{(yw)}^2}\\
+            &= \frac{yDx-xDy}{y^2}+\frac{wDz-zDw}{{w}^2}\\
+            &= \bar{D}(x/y)+\bar{D}(z/w)
+            \end{align}
+
+        Likewise we see that:\begin{align}
+            \bar{D}\bigg(\frac{x}{y}\frac{z}{w}\bigg) &= \bar{D}\bigg(\frac{xz}{yw}\bigg)\\
+                    &= \frac{ywD(xz)-xzD(yw)}{{(yw)}^2}\\
+                    &= \frac{yw(xDz+zDx)-xz(wDy+yDw)}{{(yw)}^2}\\
+                    &= \frac{yx(wDz-zDw)+wz(yDx-xDy)}{{(yw)}^2}\\
+                    &= \frac{x(wDz-zDw)}{w^2y}+\frac{z(yDx-xDy)}{y^2w}\\
+                    &= \frac{x}{y}\bar{D}(\frac{z}{w}) + \frac{z}{w}\bar{D}(\frac{x}{y})
+        \end{align}
+
+        Finally we see that for $x\in A$ we have:\begin{align}
+            \bar{D}(x) &= \bar{D}(x/1)\\
+            &= \frac{1D(x)-xD(1)}{1^2}\\
+            &= Dx-xD(1)
+        \end{align}
+        But we also know that for all $x\in A$, $D(x) = D(1x) = xD(1)+1D(x)\Rightarrow xD(1) = 0$. In particular this is true for $x=1$, so $D(1) = 0$, so we indeed see that:\begin{equation}
+            \bar{D}(x) = Dx, \text{ for all }x\in A
+        \end{equation}
+    \end{proof}
+    
+    \item Let $L(x)=Dx/x$, for $x\in K^\ast$. Show that $L(xy) = L(x)+L(y)$, this is called the logarithmic derivative.
+    \begin{proof}
+        \begin{align}
+            L(xy) &= D(xy)/xy\\
+                  &= \frac{xDy+yDx}{xy}\\
+                  &= \frac{Dy}{y}+\frac{Dx}{x}\\
+                  &= L(x)+L(y)
+        \end{align}
+    \end{proof}
+\item Let $D$ be the standard derivative in $k[x]$, over a field $k$. Let $R(x) = c\Pi{(x-\alpha_i)}^{m_i}$ with $\alpha_i,c\in k$ and $m_i\in \Z$.
+Show that:\begin{equation}
+    R'/R = \sum\frac{m_i}{x-\alpha_i}
+\end{equation}
+\begin{proof}
+    We use (a) to extend $D$ to a derivative on $k(x)$, we have:\begin{equation}
+        R'/R = L(R) = L(c\Pi{(x-\alpha_i)}^{m_i}) = L(c)+\sum L({(x-\alpha_i)}^{m_i})
+    \end{equation}
+Recall that $D(c) = 0$, furthermore, if $m_i<0$ then we have:\begin{align}
+    0 &= D(1)\\
+    &= D({(x-\alpha_i)}^{m_i}{(x-\alpha_i)}^{-m_i})\\
+    &= {(x-\alpha_i)}^{-m_i}D({(x-\alpha_i)}^{m_i})+{(x-\alpha_i)}^{m_i}D({(x-\alpha_i)}^{-m_i})\\
+    &= {(x-\alpha_i)}^{-m_i}D({(x-\alpha_i)}^{m_i})-m_i{(x-\alpha_i)}^{m_i}{(x-\alpha_i)}^{-m_i-1}\\
+    &= {(x-\alpha_i)}^{-m_i}D({(x-\alpha_i)}^{m_i})-m_i{(x-\alpha_i)}^{-1}
+\end{align}
+Therefore, $D({(x-\alpha_i)}^{m_i}) = m_i{(x-\alpha_i)}^{m_i-1}$, so the regular formula for $D$ still words so we see that:\begin{align}
+    R'/R = \sum \frac{D{(x-\alpha_i)}^{m_i}}{{(x-\alpha_i)}^{m_i}} = \sum \frac{m_i{(x-\alpha_i)}^{m_i-1}}{{(x-\alpha_i)}^{m_i}} = \sum \frac{m_i}{{(x-\alpha_i)}}
+\end{align}
+\end{proof}
+\end{enumerate}
+
+    \end{document}
