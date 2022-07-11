@@ -1,5 +1,5 @@
 # Lang_Algebra
-Notes and solutions to Lang's Algebra, updated weekly.
+Notes and solutions to Lang's Algebra.
 
 Lecture Notes may look better with inverted colours. 
 
