@@ -1,0 +1,530 @@
+\input{template.tex}
+\begin{document}
+\begin{exercise}
+Let $E = \Q(\alpha)$, where $\alpha$ is a root of the equation:\begin{equation*}
+    \alpha^3+\alpha^2+\alpha+2 = 0
+\end{equation*}
+Express $(\alpha^2+\alpha+1)(\alpha^2+\alpha)$ and $(\alpha-1)^{-1}$ in the form \begin{equation*}
+    a\alpha^2+b\alpha+c \text{ with }a,b,c\in\Q
+\end{equation*}
+\begin{proof}
+    \begin{align}
+        (\alpha^2+\alpha+1)(\alpha^2+\alpha) &= (\alpha^4+\alpha^3+\alpha^2) + (\alpha^3+\alpha^2+\alpha)\\
+        &= \alpha(\alpha^3+\alpha^2+\alpha) -2\\
+        &= -2\alpha -2
+    \end{align}
+    
+    Note by polynomial long division we see that:\begin{equation}
+        (x - 1)(x^2+2x+3) + 5 = x^3+x^2+x+2
+    \end{equation}
+    
+    So plugging in $\alpha$ in the above equation we get $(\alpha - 1)(\alpha^2+2\alpha+3) = -5$
+    
+    \begin{align}
+        \frac{1}{\alpha-1}&= \frac{\alpha^2+2\alpha+3}{(\alpha-1)(\alpha^2+2\alpha+3)}\\
+        &= \frac{-1}{5}\alpha^2+\frac{-2}{5}\alpha+\frac{-3}{5}
+    \end{align}
+\end{proof}
+\end{exercise}
+
+\begin{exercise}
+Let $E=F(\alpha)$, where $\alpha$ is algebraic over $F$, of odd degree. Show that $E=F(\alpha^2)$.
+\begin{proof}
+We will show that $\alpha\in F(\alpha^2)$. First note that this is clear if $n=1$, since in that case $\alpha\in F$. So we can assume that $3\leq n = 2m+1$. Since $\{1,\alpha,\dots, \alpha^{2m}\}$ is a basis let $a_i\in F$ such that:\begin{equation}
+    \alpha^{2m+1} = \sum_{i=0}^{2m}a_i\alpha^i  
+\end{equation}   
+
+Now we have:\begin{align*}
+    {(\alpha^2)}^{m+1} &= \alpha^{2m+2}\\
+                       &= \alpha\alpha^{2m+1}\\
+                       &= \alpha\sum_{i=0}^{2m}a_i\alpha^i\\
+                       &= a_{2m}\alpha^{2m+1}+\sum_{i=0}^{2m-1}a_i\alpha^{i+1}\\
+                       &= \sum_{i=0}^{2m}a_{2m}a_i\alpha^i + \sum_{i=1}^{2m}a_{i-1}\alpha^i\\
+    {(\alpha^2)}^{m+1} &= \sum_{i=0}^{2m}(a_{2m}a_i + a_{i-1})\alpha^i \text{ where }a_{-1} = 0 \tag{$\dagger$}
+\end{align*}
+
+Let $\beta\in F(\alpha^2)$ be given by $\beta = \sum_{j=0}^{m}(a_{2m}a_{2j} + a_{2j-1})\alpha^{2j}$, all the even terms in $\dagger$
+
+Now by $\dagger$ we see that:\begin{align*}
+    {(\alpha^2)}^{m+1} - \beta + a_{2j-1})\alpha^{2j} &= \sum_{i=0}^{2m}(a_{2m}a_i + a_{i-1})\alpha^i - \sum_{j=0}^{m}(a_{2m}a_{2j} + a_{2j-1})\alpha^{2j}\\
+    &= \sum_{j=0}^{m}(a_{2m}a_{2j+1} + a_{2j})\alpha^{2j+1} \text{ odd terms in }\dagger\\
+    &= \alpha(\sum_{j=0}^{m}(a_{2m}a_{2j+1} + a_{2j})\alpha^{2j})
+\end{align*}
+
+
+So finitely since we notice that $\sum_{j=0}^{m}(a_{2m}a_{2j+1} + a_{2j})\alpha^{2j} \in F(\alpha^2)$ we have \[\alpha = \frac{{(\alpha^2)}^{m+1} - \beta}{\sum_{j=0}^{m}(a_{2m}a_{2j+1} + a_{2j})\alpha^{2j}}\in F(\alpha^2)\]
+
+So $F(\alpha)\subseteq F(\alpha^2)\subseteq F(\alpha) = E$.
+
+\end{proof}
+\end{exercise}
+
+
+\begin{exercise}
+\begin{proof}
+Let $h(X) = \text{Irr}(\beta,F(\alpha),X)$. Then, since $g(X)\in F(\alpha)[X]$ and $g(\beta) = 0$ we have $h(X)\mid g(X)$, so $\deg h\leq \deg g$. So note that:\begin{align*}
+    [F(\alpha,\beta)\colon F] &= [F(\alpha,\beta)\colon F(\alpha)][F(\alpha)\colon F]\\
+                              &= (\deg h)(\deg f)
+\end{align*}
+But on the other hand we have:\begin{align*}
+    [F(\alpha,\beta)\colon F] &= [F(\alpha,\beta)\colon F(\beta)]\underbrace{[F(\beta)\colon F]}_{\deg g}
+\end{align*}
+Therefore we see that $\deg g \mid (\deg h)(\deg f)$, but since $gcd(\deg g, \deg f) = 1$ we have that $\deg g\mid \deg h$. So we have $\deg g \leq \deg h$. Therefore $\deg g = \deg h$, so $g(X) = ch(X)$ with $c\in F(\alpha)$. But by definition of $\text{Irr}$, $c = 1$. So $g(X) = \text{Irr}(\beta,F(\alpha),X)$ and so is irreducibe in $F(\alpha)[X]$
+\end{proof}
+\end{exercise}
+\begin{exercise}
+    Let $\alpha$ be the real positive fourth root of $2$. Find all intermidiate fields in the extension $\Q(\alpha)$ of $\Q$.
+
+    \begin{proof}
+        Notice that $\text{Irr}(\alpha,\Q,X) = X^4 - 2$, so $[\Q(\alpha)\colon \Q] = 4$. Indeed $\alpha$ is a root of this polynomial and by Eisenstein this polynomila is irreducible.We claim that 
+    
+        Now notice that ${(\alpha^2)}^2 - 2 = \alpha^4 - 2 = 0$, so $\alpha^2$ is a root of $X^2-2$. So we see that $[\Q(\alpha^2)\colon \Q] = 2$. So $\Q \subsetneq \Q(\alpha^2) \subsetneq \Q(\alpha)$.
+
+        Now let $F$ be an intermidiate field of $\Q(\alpha)$ and $\Q$, then we have:\begin{equation*}
+            4 = [\Q(\alpha)\colon \Q] = [\Q(\alpha)\colon F][F\colon \Q] 
+        \end{equation*}
+
+        So we see that $[F\colon\Q] \mid 4$, if $[F\colon \Q] = 1$ then $F = \Q$ if $[F\colon \Q] = 4$ then $F = \Q(\alpha)$, so assume that $[F\colon \Q] = 2$, so $[\Q(\alpha)\colon F] = 2$. 
+
+
+        Now let's look at $m(X) = \text{Irr}(\alpha,F,X)$ notice that since $F(\alpha) = \Q(\alpha)$ and $[\Q(\alpha)\colon F] = 3$ we see that $\deg m = 2$.
+
+        Now by inspection we notice that the roots of $X^4- 2$ are $i^k\alpha$ where $k=0,1,2,3$. Now since $X^4 - 2 \in F[X]$ we see that $m(X)\mid X^4 - 2$, furthermore since $m(\alpha) = 0$ we have that $(X-\alpha)\mid m(X)$.
+
+        Therefore we see that:\begin{equation}
+            m(X) = (X-\alpha)(X-i^k\alpha) \text{ for some }k=1,2,3
+        \end{equation}
+
+        Note since $X-\alpha, m(X)\in \Q(\alpha)[X]$ this means that $X-i^k\alpha\in \Q(\alpha)[X]$. So $i^k\alpha\in \Q(\alpha)$, but since $\Q(\alpha)\subseteq \R$ we see that $k$ must be even. So we have that:\begin{equation}
+            m(X) = (X-\alpha)(X+\alpha) = X^2-\alpha^2 \in F[X]
+        \end{equation}
+
+        So we see that $\alpha^2\in F$, so $\Q(\alpha^2)\subseteq F$ but since $2 = [\Q(\alpha)\colon \Q(\alpha^2)] = [\Q(\alpha)\colon F][F\colon \Q(\alpha^2)] = 2[F\colon \Q(\alpha^2)]$, so $[F\colon \Q(\alpha^2)] = 1$ so $F=\Q(\alpha^2)$.
+
+        So the only intermidiate fields in the extension $\Q(\alpha)$ of $\Q$ are $\Q(\alpha), \Q(\alpha^2), \Q$.
+    \end{proof}
+\end{exercise}
+
+\begin{exercise}
+    If $\alpha$ is a complex root of $X^6+X^3+1$, find all homomorphisms $\sigma\colon \Q(\alpha)\rightarrow \C$.
+\begin{proof}
+    \begin{lemma}
+        For any homomorphism $\sigma\colon F\subseteq \C\rightarrow \C$, where $F$ is as subfield of $\C$. We have $\sigma(r) = r$ for all $r\in \Q$.
+        \begin{proof}
+            Recall $\sigma(1) = 1$, so for all $n\in \N^\ast$ we have \[\sigma(n) = \sigma(\underbrace{1+1+\cdots+1}_{\text{n times}}) = \underbrace{\sigma(1)+\sigma(1)+\cdots+\sigma(1)}_{\text{n times}} = \underbrace{1+1+\cdots+1}_{\text{n times}} = n\]
+
+            Since $\sigma(0) = 0$ and $\sigma(-n) = -\sigma(n)$. We see that for all $n\in \Z$ we have $\sigma(n) = n$. 
+            
+            Therefore we see that $\sigma(\frac{1}{m}) = \sigma(m^{-1}) = {(\sigma(m))}^{-1} = m^{-1} = \frac{1}{m}$ for all $m\in \Z\setminus\{0\}$. For all $r\in \Q$ there exists $n\in \Z$ and $m\in \N^\ast$ such that $r = \frac{n}{m}$ and so we have \[\sigma(r) = \sigma(\frac{n}{m}) = \sigma(n)\sigma(\frac{1}{m}) = \frac{\sigma(n)}{\sigma(m)} = \frac{n}{m} = r\]
+        \end{proof}
+    \end{lemma}
+
+    \begin{lemma}
+        If $\alpha\in \C$ is such that there exists $n\in \N^\ast$ such that $\alpha^n = 1$ and there doesn't exist a $m\in \N^\ast$ such that $\alpha^m = 1$, then $\alpha = e^{\frac{2i\pi k}{n}}$ where $\gcd(k,n) = 1$
+        \begin{proof}
+            Recall from complex analysis we know that $\alpha = e^{\frac{2i\pi k}{n}}$, for some $0\leq k\leq n$. Now let $d = \gcd(k,n)$, so let $k_1,n_1\in \N$ be such that $dk_1 = k$ and $dn_1 = n$,
+
+            $\therefore$\begin{equation}
+                \alpha^{n_1} = e^{\frac{2i\pi kn_1}{n}} = e^{\frac{2i\pi d{k_1}{n_1}}{n}} = e^{2i\pi k_1} = 1
+            \end{equation}
+
+            Since $n_1\leq n\Rightarrow n_1 = n$ so $d = 1$.
+        \end{proof}
+    \end{lemma}
+
+    \begin{lemma}
+        The roots of $X^6+X^3+1$ are of the form $e^{\frac{2i\pi k}{9}}$, where $1\leq k<9$ and $\gcd(k,9) = 1$.
+
+        \begin{proof}
+            By polynomial division we see that:\begin{equation}
+                X^9 - 1 = (X^3-1)(X^6+X^3+1)
+            \end{equation}
+            
+            So note that the roots of $X^6+X^3+1$ are the roots of $X^9-1$ that are not roots of $(X^3-1)$ (indeed we can check derivatives to see that these polynomials don't have any multiple roots).
+            
+            Let $\beta$ be such that $\beta^9 = 1$ assume that $\beta^n = 1$ for $n<9$. Then we have $e^{\frac{2\pi ki}{9}}$, for some $0\leq k<9$ and we have:\begin{align*}
+                \beta^n = e^{\frac{2\pi kn i}{9}}
+            \end{align*}
+
+            So we have $9\mid kn$. Since both $k,n<9$ this means that $3\mid k$, so $\beta$ is a root of $X^3-1$. So the roots of $X^6+X^3+1$ are elements $\beta$ such that $\beta^9 = 1$ and $\beta^n\neq 1$ for $n<9$. So by the lemma 2, the roots of this polynomial are:\begin{equation}
+                e^{\frac{2i\pi k}{9}} \text{ such that }\gcd(9,k) = 1
+            \end{equation} 
+        \end{proof}
+    \end{lemma}
+Let $\sigma\colon \Q(\alpha)\rightarrow \C$, be any homomorphism:
+
+By lemma 1:\begin{align*}
+    0 = \sigma(\alpha^6+\alpha^3+1) = {\sigma(\alpha)}^6+{\sigma(\alpha)}^3+1
+\end{align*}
+
+So $\sigma$ sends $\alpha$ to another root of $X^6+X^3+1$. Furthermore, let $\beta$ be a root of $X^6+X^3+1$ since $\Q(\alpha) = \{\sum_{i=0}^5 a_i\alpha^i \mid a_i\in \Q\}$, we can define a homomorphism $\sigma_\beta\colon \Q(\alpha)\rightarrow \C$, with $\sigma_\beta(\alpha) = \beta$ and $\sigma(r) = r$ for all $r\in \Q$. 
+
+So all homomorphisms of from $\Q(\alpha)\rightarrow \C$ are the homomorphisms sending $\alpha$ to another root of $X^6+X^3+1$. If we let $\{k_1,k_2,\dots,k_6\}$ be the coprime integers smaller than $9$, where wlog we let $\alpha = e^{\frac{2\pi i k_1}{9}}$, then the homomorphisms are $\sigma_i \colon \Q(\alpha)\rightarrow \C$ where $\sigma_i(\alpha) = e^{\frac{2\pi i k_i}{9}}$.
+
+
+\end{proof}
+\end{exercise}
+
+\begin{exercise}
+\begin{proof}
+Note that $((\sqrt 2 +\sqrt 3)^2-5)^2-24 = (2 +3 + \sqrt{24} -5)^2-24 = 0$. So $\sqrt 2 + \sqrt 3$ is algebraic, furthermore since $f(X) = (X^2-5)^2-24 = X^4-10X^2+1$, is such that $f(\sqrt{2}+\sqrt{3}) = 0$, we see that $[\Q(\sqrt 2 +\sqrt 3)\colon \Q]\leq 4$. 
+\begin{equation}
+    [\Q(\sqrt 2 +\sqrt 3)\colon \Q] = [\Q(\sqrt 2 +\sqrt 3)\colon \Q(\sqrt{2})][\Q(\sqrt{2})\colon \Q] = [\Q(\sqrt 2 +\sqrt 3)\colon \Q(\sqrt{2})]2
+\end{equation}
+
+Since $[\Q(\sqrt 2 +\sqrt 3)\colon \Q]\leq 4$ and is even: $[\Q(\sqrt 2 +\sqrt 3)\colon \Q]=2$ or $[\Q(\sqrt 2 +\sqrt 3)\colon \Q]= 4$. 
+
+Assume for a contradiction that $[\Q(\sqrt 2 +\sqrt 3)\colon \Q]=2$, then we have $[\Q(\sqrt 2 +\sqrt 3)\colon \Q(\sqrt{2})] = 1$ so we have: $\Q(\sqrt 2 +\sqrt 3)=\Q(\sqrt{2})$. So we have $\sqrt{2},\sqrt{2}+\sqrt{3}\in \Q(\sqrt{2}) \Rightarrow \sqrt{3}\in \Q(\sqrt{2})$.
+
+\
+
+So there are $a,b\in Q$ such that:\begin{equation}
+    \sqrt{3} = a+b\sqrt{2} \Rightarrow 3 = (a+b\sqrt{2})^2 = ((a^2+2b^2) + 2ab\sqrt{2}
+\end{equation}
+Therefore:\begin{equation}
+    \sqrt{2} = \frac{(3-(a^2+2b^2))}{2ab}\in \Q
+\end{equation}
+Which is famously false.
+
+Therefore $[\Q(\sqrt 2 +\sqrt 3)\colon \Q]= 4$
+\end{proof}
+\end{exercise}
+
+\begin{exercise}
+\begin{proof}
+    
+\end{proof}
+\end{exercise}
+
+
+\begin{exercise}
+\begin{proof}
+
+\end{proof}
+\end{exercise}
+\begin{exercise} Find the splitting field of $f(X) = X^{p^8}-1$ over the field $\Z/p\Z$.
+\begin{proof}
+    Let $K$ be the spitting field of $f(X)$, the for all non-zero $\alpha\in K$ we have $\alpha^{p^8} = 1$, but recall we also have 
+\end{proof}
+\end{exercise}
+
+\begin{exercise}
+Let $\alpha$ be a real number such that $\alpha^4 = 5$.\begin{enumerate}[label = (\alph*)]
+    \item Show that $\Q(i\alpha^2)$ is normal over $\Q$
+    \item Show that $\Q(\alpha+i\alpha)$ is normal over $\Q(i\alpha^2)$
+    \item Show that $\Q(\alpha+i\alpha)$ is not normal over $\Q$
+\end{enumerate}
+\begin{proof}
+    \begin{enumerate}[label = (\alph*)]
+    \item Note since:\begin{equation}
+        {(i\alpha^2)}^2 = -1\alpha^4 = -5
+    \end{equation}
+    So $i\alpha^2$ is the root of the polynomial $X^2+5\in\Q[x]$. The other root of this polynomial is $-i\alpha^2$.
+    
+    So $\Q(i\alpha^2) = \Q(i\alpha^2,-i\alpha^2)$ is the splitting field of $X^2+5$, and so it is normal over $\Q$.
+    
+    \item Note since:\begin{equation}
+        {(\alpha+i\alpha)}^2 = \alpha^2 + 2i\alpha^2 - \alpha^2 = 2i\alpha^2
+    \end{equation}
+    So $\alpha+i\alpha$ is a root of the polynomial $X^2-2i\alpha^2\in \Q(i\alpha^2)[X]$, the other root of this polynomial is $-(\alpha+i\alpha)$. 
+    
+    So $\Q(\alpha+i\alpha) = \Q(\alpha+i\alpha, -(\alpha+i\alpha))$ is the splitting field of 
+    $X^2-2i\alpha^2$. So $\Q(\alpha+i\alpha)$ is normal over $\Q(i\alpha^2)$.
+    
+    \item Let:\begin{equation}
+          f(X) = (X^2-2i\alpha^2)(X^2+2i\alpha^2) = X^4+20
+    \end{equation}
+    Note that\begin{equation}
+        {(-\alpha+i\alpha)=(i(\alpha+i\alpha))}^2= {-(\alpha+i\alpha)}^2=-2i\alpha^2
+    \end{equation}
+    So it is a root of $(X^2+2i\alpha^2)$. So the roots of $f$ are $\pm (\alpha+i\alpha)$ and $\pm (-\alpha+i\alpha)$.
+    
+    Assume for a contradiction that $-\alpha+i\alpha\in \Q(\alpha+i\alpha)$ then:\begin{align*}
+        r(\alpha+i\alpha) &= -\alpha+i\alpha \text{ for some }r\in \Q\\
+        r(\alpha+i\alpha) &= i(\alpha+i\alpha)\\
+    \end{align*}
+    Therefore, $r = i$ which is not possible since $i\not\in \Q$. So $-\alpha+i\alpha\not\in \Q(\alpha+i\alpha)$.
+    
+    Note $X^4+20$ is irreducible by Eisenstein, that has a root in $\Q(\alpha+i\alpha)$ but does not split into linear factors in $\Q(\alpha+i\alpha)$. So it is indeed not normal over $\Q$.
+\end{enumerate}
+\end{proof}
+\end{exercise}
+\begin{exercise}
+    Describe the splitting fields of the following polynomials over $\Q$, and find the dgree of each such splitting field.
+
+    \begin{enumerate}[label= (\alph*)]
+        \item $X^2-2$
+        \item $X^2-1$
+        \item $X^3-2$
+        \item $(X^3-2)(X^2-2)$
+        \item $X^2+X+1$
+        \item $X^6+X^3+1$
+        \item $X^5-7$
+    \end{enumerate}
+\begin{proof}
+    \begin{enumerate}[label=(\alph*)]
+        \item The roots of $X^2-2$ are $\pm\sqrt{2}$ so the splitting field of $X^2-2$ is $\Q(\sqrt{2})$. The degree is  $[\Q(\sqrt{2})\colon \Q] = 2$
+        \item The splitting field of $X^2-1$ is $\Q$, and $[\Q\colon \Q] = 1$.
+        \item Let $\alpha$ be the real root of $X^3 - 2$, we know that a real root exists by the intermidiate value theorem.
+        Let $\zeta_3$ be a root of $X^2+X+1$, then since $X^3-1 = (X-1)(X^2+X+1)$, we see that ${\zeta_3}^3 - 1=0$. Since $\zeta_3$ is a primitive root of unity we can assume wlog that $\zeta_3 = e^{\frac{2i\pi}{3}}$ 
+        
+        Then notice that:\begin{equation}
+            {({\zeta_3}^i\alpha)}^3 - 2 = {\zeta_3}^{3i}\alpha^3 - 2 = \alpha^3 - 2 = 0 \text{ for }i=0,1,2
+        \end{equation}
+
+        Note since $\zeta_3\neq \pm 1$ we see that $\alpha, \zeta_3 \alpha, {\zeta_3}^2 \alpha$ are the distinct roots of $X^3-2$. So the splitting field of $X^3 - 2$ over $\Q$ is $\Q(\alpha, \zeta_3\alpha, {\zeta_3}^2\alpha)$.
+
+
+        But notice, since $\alpha,\zeta_3\alpha\in \Q(\alpha, \zeta_3\alpha, {\zeta_3}^2\alpha)$\begin{equation}
+            \zeta = \frac{1}{2}(\zeta\alpha)(\alpha^2)\in \Q(\alpha, \zeta \alpha, \zeta^2\alpha)
+        \end{equation}
+
+        So $\Q(\alpha,\zeta)\subseteq \Q(\alpha, \zeta \alpha, \zeta^2\alpha)$, the other inclusion is clear so $\Q(\alpha, \zeta)$ is the splitting field of $X^3 - 2$ over $\Q$.
+        
+        \
+
+        \begin{align*}
+            [\Q(\alpha,\zeta)\colon \Q] &= [\Q(\alpha,\zeta)\colon\Q(\alpha)][\Q(\alpha)\colon \Q]\\
+                                        &= 3[\Q(\alpha,\zeta)\colon\Q(\alpha)]
+        \end{align*}
+        
+        Note that since $\frac{d}{dx}X^2+X+1 = 2X+1$, then then:\begin{equation}
+            (-0.5)^2+0.5+1 = 0.75\leq X^2+X+1 \text{ for all }X\in\R
+        \end{equation} 
+
+        So this function has no roots in $\R$, so $\zeta_3\in \C\setminus \R$, so $\zeta_3\not\in \Q(\alpha)\subseteq \R$.
+
+        \
+
+
+        Since $\text{Irr}(\zeta_3, \Q(\alpha), X)\mid X^2+X+1$ and can't be of degree $1$, we find that $\text{Irr}(\zeta_3, \Q(\alpha), X)=X^2+X+1$. So \begin{equation}
+            [\Q(\alpha,\zeta)\colon \Q] = 3\cdot 2 = 6
+        \end{equation}
+
+        \item Recall the roots of $(X^3-2)(X^2-2)$, are $\pm \sqrt{2}$ and $\zeta_3^i\alpha$, for $i=0,1,2$. Where $\zeta_3$ and $\alpha$ have the same definition as in $(c)$.
+        
+        Any field that contains these roots also contain $\zeta_3$ so contains $\Q(\zeta_3,\alpha. \sqrt{2})$. But $\Q(\zeta_3,\alpha. \sqrt{2})$ contains all the roots of this polynomial so it is indeed the splitting field.
+
+        Now since\begin{align*}
+            [\Q(\alpha, \zeta_3,\sqrt{2})\colon \Q] &= [\Q(\alpha, \zeta_3,\sqrt{2})\colon \Q(\sqrt{2})][\Q(\sqrt{2})\colon \Q]\\ 
+            &= [\Q(\alpha, \zeta_3,\sqrt{2})\colon \Q(\alpha, \sqrt{2})][\Q(\alpha,\sqrt{2})\colon \Q(\sqrt{2})][\Q(\sqrt{2})\colon \Q]\\
+            &= 4[\Q(\alpha,\sqrt{2})\colon \Q(\sqrt{2})]
+        \end{align*}
+
+        Note we indeed see that since $\zeta_3$ is imaginary, $\zeta_3\not\in \Q(\alpha, \sqrt{2})\subseteq\mathbb{R}$ so $[\Q(\alpha, \zeta_3,\sqrt{2})\colon \Q(\alpha, \sqrt{2})] = 2$.
+
+        \
+
+        On the other hand notice that:\begin{align*}
+            [\Q(\alpha, \zeta_3,\sqrt{2})\colon \Q] &= [\Q(\alpha, \zeta_3,\sqrt{2})\colon \Q(\alpha, \zeta_3)][\Q(\alpha, \zeta_3)\colon \Q]\\
+             &= 6[\Q(\alpha, \zeta_3,\sqrt{2})\colon \Q(\alpha, \zeta_3)]
+        \end{align*}
+
+        So $3\mid [\Q(\alpha, \zeta_3,\sqrt{2})\colon \Q] = 4[\Q(\alpha,\sqrt{2})\colon \Q(\sqrt{2})]\Rightarrow 3\mid [\Q(\alpha,\sqrt{2})\colon \Q(\sqrt{2})]$.
+
+        Since $\text{Irr}(\alpha, \Q(\sqrt{2}), X)\mid X^3-2$, we see that $[\Q(\alpha,\sqrt{2})\colon \Q(\sqrt{2})]\leq 3$, therefore $[\Q(\alpha,\sqrt{2})\colon \Q(\sqrt{2})]=3$ so:\begin{equation}
+            [\Q(\alpha, \zeta_3,\sqrt{2})\colon \Q] = 12
+        \end{equation}
+        \item Recall that the roots of $X^2+X+1$ are $\zeta_3$ and $\zeta_3^2$, where $\zeta_3$ is defined as above. So the splitting field of this polynomial is:\begin{equation}
+            \Q(\zeta_3)
+        \end{equation}
+        Furthermore, since $\zeta_3\not\in \Q$ we see that $[\Q(\zeta_3)\colon \Q] = 2$.
+        \item Let $\omega_1,\omega_2,\omega_3$ be the roots of $X^3 - \zeta_3$ and $\gamma_1,\gamma_2,\gamma_3$ be the roots of $X^3-{\zeta_3}^2$. Note we see that these roots are all distinct by looking at derivatives.
+        We have: \begin{equation}
+            {(\omega_i)}^6+\omega_i^3+1 = \zeta^3+\zeta+1 = 0 \text{ and } {(\gamma_i)}^6+\gamma_i^3+1 = {(\zeta^2)}^3+\zeta^2+1 = 0 \text{ for }i=1,2,3
+        \end{equation}
+
+       Since $\zeta_3 = e^{\frac{2i\pi(1+3k)}{3}}$, for $k\in\Z$. We have that the distinct roots of $X^3-\zeta_3$ are $e^{\frac{2i\pi(1+3k)}{9}}$, for $k=0,1,2$. More explicitely the roots:\begin{itemize}
+        \item $e^{\frac{2i\pi}{9}}$
+        \item $e^{\frac{8i\pi}{9}}$
+        \item $e^{\frac{14i\pi}{9}}$
+       \end{itemize}
+
+       Likewise the distinct roots of $X^3-{\zeta_3}^2$ are $e^{\frac{2i\pi(2+3k)}{9}}$, for $k=0,1,2$. More explicitely the roots:\begin{itemize}
+        \item $e^{\frac{4i\pi}{9}}$
+        \item $e^{\frac{10i\pi}{9}}$
+        \item $e^{\frac{16i\pi}{9}}$
+       \end{itemize}
+
+       Note that any field containing the roots of $X^6+X^3+1$ contains the field $\Q(e^{\frac{2\pi i}{9}})$. Furthermore since:\begin{align*}
+            {(e^{\frac{2i\pi}{9}})}^2 &= e^{\frac{4i\pi}{9}}\\
+            {(e^{\frac{2i\pi}{9}})}^4 &= e^{\frac{8i\pi}{9}}\\
+            {(e^{\frac{2i\pi}{9}})}^8 &= e^{\frac{16i\pi}{9}}\\
+            {(e^{\frac{2i\pi}{9}})}^{-2} &= e^{\frac{-4i\pi}{9}} = e^{2\pi i + \frac{-4i\pi}{9}} = e^{\frac{14i\pi}{9}}\\
+            {(e^{\frac{2i\pi}{9}})}^{-4} &= e^{\frac{-8i\pi}{9}} = e^{2\pi i + \frac{-8i\pi}{9}} = e^{\frac{10i\pi}{9}}\\
+       \end{align*}
+
+       So $\Q(e^{\frac{2\pi i}{9}})$ is contains all the roots of $X^6+X^3+1$ and so is the splitting field over $\Q$. Furthermore, using Eisenstein on ${(X+1)}^6+{(X+1)}^3+1$, we see that $X^6+X^3+1$ is irreducible so:
+        
+       \[[\Q(e^{\frac{2\pi i}{9}})\colon \Q] = \deg(X^6+X^3+1) = 6\]
+        \item $X^5-7$
+        
+        By the intermidiate value theorem, we can see that this polynomial has a real root, call this $\beta$. Now let $\zeta_5$ be a root of $X^4+X^3+X^2+X+1$, note since \[{(\zeta_5)}^5-1 = ({(\zeta_5)} - 1)({(\zeta_5)}^4+{(\zeta_5)}^3+{(\zeta_5)}^2+{(\zeta_5)}+1) = 0\] 
+
+        And if $n\leq 5$ is such that $\zeta_5^n = 1$, then we have $(X^n - 1)\mid (X^5-1) = (X-1)(X^4+X^3+X^2+X+1)$, but from Eisenstein we can see that $X^4+X^3+X^2+X+1$ is irreducibe and $\zeta+5\neq 1$, so we have $X^n-1=X^5-1$, so $n=5$.
+
+       Then $\zeta_5$ is a primitive root of unity.
+    
+       So WLOG we can let $\zeta_5 = e^{\frac{2\pi i }{5}}$, now by a similar argument from, $(c)$ we see that the splitting field of $X^5-7$ is:\[\Q(\beta,\zeta_5)\]
+
+       And similarly to $(c)$ we conclude that \[[\Q(\beta,\zeta_5)\colon \Q] = [\Q(\beta,\zeta_5)\colon \Q(\beta)][\Q(\beta)\colon \Q] = 4\cdot 5 = 20 \]
+    \end{enumerate}
+\end{proof}
+\end{exercise}
+
+
+
+
+
+
+
+\begin{exercise}
+Let $K$ be a finite field with $p^n$ elements, show that every element of $K$ has an unique p$^{th}$ root in $K$.
+\begin{proof}
+   Let $\alpha\in K$ and $f(X) = X^p-\alpha\in K[X]$, let $\beta\in K^a$ be a root of $f(X)$, then notice that we have $\beta^p = \alpha$  
+   
+   Recall that $\alpha$ is a root of the polynomial $g(X) = X^{p^n}-X$:\begin{equation}
+       0 = \alpha^{p^n}-\alpha = (\beta^p)^{p^n}-\beta^p = (\beta^{p^n})^p-\beta^p = (\beta^{p^n}-\beta)^p
+   \end{equation}
+   
+   Since $K^a$ is a field this implies that $\beta^{p^n}-\beta = 0$. So we see that $\beta$ is a root of $g(X)$ so $\beta\in K$.
+   
+   Now we will show uniqueness assume that $\beta$ and $\gamma$ are roots of $f(X)$ so we have:\begin{equation}
+       (X-\gamma)^p = X^p-\gamma^p = X^p-\alpha = X^p-\beta^p = (X-\beta)^p
+   \end{equation}
+   So by unique factorization of $K[X]$ we have that $\gamma = \beta$.
+\end{proof}
+\end{exercise}
+\begin{exercise} If the roots of a monic polynomial $f(X)\in k[X]$ in some splitting field are distinct and form a field, then char $k=p$ and $f(X) = X^{p^n}-X$.
+\begin{proof}
+  Let $S = \{\alpha\in k^a \mid f(\alpha) = 0\}$, since $S$ is finite and a field there is a $p$ such that: $\underbrace{1+1+\dots+1}_{p\text{ times}}$.
+  
+  So we indeed see that $k$ has characteristic $p$, now notice that since $S$ is a finite field of characteristic $p$, then it is of the form $\F_{p^n}$, for some $n\geq 1$. So all elements of $S$ are the roots of a polynomial $X^{p^n}-X$. So we have:\begin{equation}
+      f(X) = \prod_{\alpha\in S}(X-\alpha) = X^{p^n}-X
+  \end{equation}
+\end{proof}
+\end{exercise}
+\begin{exercise}
+Let $\text{char} K = p$. Let $L$ be an extension of $K$, and suppose that $[L\colon K]$ is prime to $p$. Show that $L$ is separable over $K$.
+\begin{proof}
+    Recall that $[L\colon K] = p^n{[L\colon K]}_s$, for some $n\in \N$. But we also know that $[L\colon K]$ is prime to $p$, so $n=0$. 
+\end{proof}
+\end{exercise}
+
+\begin{exercise}
+    Suppose $\text{char } K = p$. Let $a\in K$, if $a$ has no $p$-th rooth in $K$, show that $X^{p^n} - a$ is irreducibe in $K[X]$ for all positive integers $n$.
+    \begin{proof}
+
+    \end{proof}
+\end{exercise}
+\begin{exercise}
+    Let $\text{char }K = p$. Let $\alpha$ be algebraic over $K$. Show that $\alpha$ is separable if and only if $K(\alpha) = K(\alpha^{p^n})$ for all positive integers $n$.
+    \begin{proof}
+        \begin{itemize}
+            \item $\Rightarrow$ Assume that $\alpha$ is separable. 
+        \end{itemize}
+    \end{proof}
+\end{exercise}
+\begin{exercise}
+    Prove that the following two properties are equivalent:\begin{enumerate}[label = (\alph*)]
+        \item Every algebraic extension of $K$ is separable
+        \item Either $\text{char }K = 0$, or $\text{char }K=p$ and every element of $K$ has a $p$-th root in $K$.
+    \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+    Show that every element of a finite field can be written as a sum of two squares in that field.
+    \begin{proof}
+        Let $F$ be a finite field and $\alpha \in F$. 
+    \end{proof}
+\end{exercise}
+\begin{exercise}
+    Let $E$ be an algebraic extension of $F$. Show that every subring of $E$ which contains $F$ is actually a field. Is this necessarily true if $E$ is not algebraic over $F$?
+    
+    Prove or give a counterexample
+    \begin{proof}
+        Let $F\subseteq L$ be a subring of $E$. Let $\alpha\in L\setminus\{0\}$, since $\alpha$ is algebraic over $F$ let \[p(X) = \text{Irr}(\alpha, F, X) = a_0+a_1x+\cdots + a_{n-1}x^{n-1}+x^n\]
+        Since this polynomial is irreducibe we know that $a_0\neq 0$, since if it was we could factor this polynomial by $0$.
+
+        \
+
+        So we have:\begin{align*}
+            a_0 + a_1\alpha +\cdots + \alpha^n = 0 \Rightarrow -a_0^{-1}( a_1\alpha +\cdots + \alpha^n) = 1 \Rightarrow \alpha\underbrace{(-a_0^{-1}( a_1 + a_2\alpha + \cdots + \alpha^{-1}))}_\beta = 1
+        \end{align*}
+But since $\alpha,a_i\in L$, we see that $\alpha^{-1} = \beta\in L$. So every non-zero element of $L$ is invertible, so $L$ is a field(it is trivially a commutative ring).
+
+Now let us look ath the extension $\R/\Q$, let $x\in \R$ ne transcendental over $\Q$ (we can choose $x = \pi$ if we want, but since $\Q^a$ is countable and $\R$ is uncountable there are an uncountably infinite amount of transcendental numbers in $\R$ over $\Q$).
+
+
+Let $\Q[x] = \{a_0+a_1x+ \cdots + {a_n}x^n \mid n\in \N, \ a_i\in \Q \text{ and }a_n\neq 0 \}$, this is a subring of $\R$. Assume that this is a field, then there exists $a_i\in \Q$ such that:\begin{eqnarray}
+    a_0+a_1x+ \cdots + {a_n}x^n = x^{-1}
+\end{eqnarray}
+Note that $n>0$, since $x\not\in \Q \Rightarrow x^{-1}\not\in \Q$. From this we see that we have:\begin{eqnarray}
+    -1 + a_0x + a_1x^2 + \cdots + {a_n}x^{n+1} = 0
+\end{eqnarray}
+
+So if we let $-1+\sum_{i=0}^n{a_i}{X^{i+1}} = q(X)\in \Q[X]$, is a polynomial such that $q(x) = 0$. But this contradicts the fact that $X$ is transcendental.
+So this statement is not necessarily true if $E$ is not algebraic over $F$.
+    \end{proof}
+\end{exercise}
+
+\begin{exercise}
+    Let $E=F(x)$ where $x$ is transcendental over $F$. 
+
+    \begin{enumerate}[label = (\alph*)]
+        \item Let $K\neq F$ be a subfield of $E$ which contains $F$. Show that $x$ is algebraic over $K$.
+        \item Let $y=\frac{f(x)}{g(x)}$ be a ration function with relatively prime polynomials $f,g\in F[x]$. Let $n = \max(\deg f,\deg g)$. Suppose $n\geq 1$, prove that:
+        \[[F(x)\colon F(y)] = n\]
+    \end{enumerate}
+
+    \begin{proof}
+        \begin{enumerate}[label = (\alph*)]
+            \item Let $y\in K\subseteq E$. Furthermore we can assume that $y\not\in F$. Recall \[E = F(x) = \{f(x) \mid f\in F(X) \text{ is a rational function}\}\] 
+            So there is a rational function $f(X)$ such that $f(x) = y$. Let $p(X),q(X)\in F[X]$ such that $f(X) = \frac{p(X)}{q(X)}$, we have:\begin{equation}
+                p(x) - q(x)y = 0
+            \end{equation}
+
+            So let $s(X)\in E[X]$ be given by $s(X) = p(X) - q(X)y$. Assume that $s(X) = 0$ this means that:\begin{align*}
+                p(X) -q(X)y = 0 \Rightarrow p(X) = q(X)y
+            \end{align*}
+            Since $q\neq 0$, this implies that $y\in F$(just compare coefficients), but this is impossible by assumption. So $s(X)\neq 0$ and $s(x) = 0$, so $x$ is algebraic over $E$. 
+
+            \item Since $n\geq 1$, notice that $0\neq f(X) - g(X)y \in F(y)[X]$. So $\text{Irr}(x,F(y),X) \mid f(X) - g(X)y$.
+            
+
+        \end{enumerate}    
+    \end{proof}
+\end{exercise}
+
+\begin{exercise}
+    Let $\Z^+$ be the set of all positive integers, and $A$ an additive abelian group. Let $f\colon \Z^+\rightarrow A$ and $g\colon \Z^+\rightarrow A$ be maps. Suppose that for all $n$,
+    \[f(n) = \sum_{d\min n}g(d)\]
+Let $\mu$ be the Möbius function. Prove that:\[g(n) = \sum_{d\mid n}\mu(n/d)f(d)\]
+
+Recall the Möbius fucntion is the function such that:\[\begin{cases}
+    \mu(1) = 1\\
+    \mu(p_1\cdots p_r) = {(-1)}^r \text{ if }p_i\text{ are distinct primes}\\
+    mui(m) = 0\text{ if }p^2\mid m\text{ for some prime }p.
+\end{cases}\]
+\begin{proof}
+    
+\end{proof}
+\end{exercise}
+
+
+\newpage
+\textbf{23.}Let $k$ be a finite field with q elements\begin{enumerate}[label = (\alph*)]
+    \item Define the \textbf{zeta function} by:\begin{equation}
+        Z(t) = (1-t)^{-1}\prod_{p}(1-t^{\text{deg }p})^{-1}
+    \end{equation}
+    Where $p$ ranges over all irreducible polynomials $p=p(X)\in k[X]$ with leading coefficient $1$.
+    
+    \
+    
+    Prove that $Z(t)$ is a rational function and determine this rational function.
+    
+    \item Let $\pi_q(n)$ be the number of primes $p$ as in $(a)$ of degree $\leq n$. Prove that \begin{equation}
+        \pi_q(m) = \frac{q}{q-1}\frac{q^m}{m} \text{ for }m\rightarrow\infty
+    \end{equation}
+\end{enumerate}
+\end{document}
