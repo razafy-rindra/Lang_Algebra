@@ -106,17 +106,46 @@
         \textbf{Goursat's Lemma.} Let $G$, $G'$ be groups and let $H$ be a subgroup of $G\times G'$ such that the projections $p_1\colon H\rightarrow G$ and $p_2\colon H\rightarrow G'$ are surjective. Let $N$ be the kernel of $p_2$ and $N'$ be the kernel of $p_1$. One can identify $N$ as a normal subgroup of $G$, and $N'$ as a normal subgroup of $G'$. Show that the image of $H$ in $G/N\times G'/N'$ is the graph of an isomorphism \[G/N\simeq G'/N'\]
     
     \begin{proof}
+        First of all notice that \begin{equation*}
+            \ker p_1 = \{(e,b)\in H\}\simeq N' = \{b\in G' \mid (e,b)\in H\}\text{ and }\ker p_2 = \{(a,e')\in H\} \simeq N = \{a\in Ga \mid (a,e')\in H\}
+        \end{equation*} 
         Let \begin{equation*}
             \varphi_1\colon G\rightarrow G/N \text{ and } \varphi_2\colon G'\rightarrow G'/N'
         \end{equation*}
         Be the canonical maps.
 
         Let $\varphi\colon H\rightarrow G/N\times G'/N'$ be given by \[\varphi((g_1,g_2)) = (\varphi_1(g_1),\varphi_2(g_2)) \]
-        This is a homomorphism since $\varphi_1$ and $\varphi_2$ are.
+        This is a homomorphism since $\varphi_1$ and $\varphi_2$ are homomorphisms.
 
         \
+        \begin{lemma} \label{lem1}
+            If $(xN,x'N'), (yN,y'N')\in \varphi(H)$ then $xN = yN \iff x'N = y'N$.    
+        \end{lemma}
+        \begin{proof}
+        First assume that $xN = yN$:
 
+        \
         
+        We have: $(xy^{-1}N,{x'}{y'}^{-1}N') = (N,{x'}{y'}^{-1}N') \in \varphi(H)$. So let $(a,b)\in H$ such that:\begin{equation*}
+            (aN,bN') = \varphi(a,b) = (N,{x'}{y'}^{-1}N')
+        \end{equation*}
+    
+        So we see that $aN = N \Rightarrow a\in N \simeq \ker p_2$. This means that $(a,e')\in H$, so we see that $(e,b) = (a,e')^{-1}(a,b)\in H$, so $b\in N'$. Therefore $N' = bN = {x'}{y'}^{-1}N'$ so $x'N' = y'N'$.
+
+        The other direction is similar.
+        \end{proof}
+
+        Now we let \begin{equation*}
+            \psi\colon G/N \rightarrow G'/N' \text{ be such that } (aN, \psi(aN)) \in \varphi(H) \text{ for all }aN\in G/N
+        \end{equation*}
+
+        We will first show that this function makes sense, note that since the projection from $H$ to $G$ for all $xN$, we see that $(x,y)\in H$ for some $y$. So $\varphi(x,y) = (xN,yN')\in \varphi(H)$ so $xN$ is in the projection off $\varphi(H)$ to $G/N$. So we see that the projection is surjective so: 
+        for all $aN\in G/N$ there exists a $bN'\in G'/N'$ such that $(aN,bN')\in \varphi(H)$. Furthermore by lemma \ref{lem1} this $bN'$ is unique. Since this $bN'$ exists and is unique then we can let $\psi(aN) = bN'$ and this function is well-defined.
+
+        Now let $aN,cN\in G/N$ since $(aN, \psi(aN)),(cN,\psi(xN)) \in \varphi(H)$ so:\begin{equation*}
+            H \ni (aN, \psi(aN))(cN,\psi(xN)) = (acN, \psi(aN)\psi(cN)) \Rightarrow \psi(aNcN) = \psi(acN) = \psi(aN)\psi(cN)
+        \end{equation*} 
+        So $\psi$ is indeed a homomorphism. Finallly from lemma \ref{lem1} we see that $\psi(aN) = \psi(bN)$ implies that $(aN,\psi(aN)),(bN,\psi(aN))\in \varphi(H)$ so $aN=bN$. So this function is indeed an isomorphism.
     \end{proof}
     \end{exercise}
 
