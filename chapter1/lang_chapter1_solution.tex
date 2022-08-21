@@ -246,10 +246,22 @@
             \end{equation*}
             \item First of all, let $x,y\in G$ be such that $xH_1 = yH_1$ and $xH_2 = yH_2$, then we have $y^{-1}x\in H_1$ and $y^{-1}x\in H_2$ so $y^{-1}x\in H_1\cap H_2$ so $x(H_1\cap H_2) = y(H_1\cap H_2)$ 
             
-            
-            Let $a_1H_1,\ldots, {a_n}H_1$ be the distinct cosets of $H_1$ and $b_1H_2,\ldots, {b_m}H_2$ be the distinct cosets of $H_2$.
-            
-            Let $a\in G$ and let $i$ and $j$ such that $aH_1 = {a_i}H_1$ and $aH_2 = {b_j}H_2$.
+            Conversely assume that $x(H_1\cap H_2) = y(H_1\cap H_2)$, then we have that $y^{-1}x\in H_1\cap H_2$ so $y^{-1}x\in H_1$ and $y^{-1}x\in H_2$.
+
+            \
+
+            So we have shown that $x(H_1\cap H_2) = y(H_1\cap H_2)$ if and only if $xH_1 = yH_1$ ans $xH_2=yH_2$.
+
+            \
+
+            Now finally we let, $C_i$ be the set of distinct reperesentatives of $H_i$ and $C$ be the set of distinct reperesentatives of $H_1\cap H_2$ \[\begin{array}{cccc}
+                f\colon &C&\rightarrow& C_1\times C_2\\
+                        &c(H_1\cap H_2)&\rightarrow& (cH_1,cH_2)
+            \end{array}\]
+            Since we $x(H_1\cap H_2) = y(H_1\cap H_2)$ if and only if $(xH_1,xH_2) = (yH_1,yH_2)$ see that this function is well-defined and injective. Therefore from set theory:\begin{equation*}
+                [G\colon H_1\cap H_2] = |C|\leq |C_1||C_2| = [G\colon H_1][G\colon H_2] < \infty
+            \end{equation*}
+
         \end{enumerate}
     \end{proof}
     \end{exercise}
