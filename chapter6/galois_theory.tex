@@ -1,6 +1,26 @@
 \input{../template.tex}
-
+\newcommand{\Gal}{\text{Gal}}
 \begin{document}
 In this chapter we will study the core of Galois theory, the group of automorphisms of a finite (and sometimes infinite) Galois extension at length.
     \section{Galois extensions}
+\begin{definition}
+    Let $K$ be a field and let $G$ be a group of automorphisms of $K$. We let \[K^G = \{x\in K\mid x^\sigma = x \text{ for all }\sigma \in G\}\]We call this the \textbf{fixed field} of $G$. 
+\end{definition}
+
+\begin{definition}
+    An algebraic extension $K$ of a field $k$ is called \textbf{Galois} if it is normal and seperable.
+
+    \
+
+    The group of automorphisms of $K$ over $k$ is called the \textbf{Galois group} of $K$ over $k$, and is denoted $G(K/k), \ G_{K/k}, \ \Gal(K/k)$ or simply $G$.
+\end{definition}
+
+This is the main theorem of the Galois theory or finite Galois extensions.
+\begin{theorem}\label{main}
+    Let $K$ be a finite Galois extension of $k$, with Galois group $G$. There is a bijection between the set of subfields $E$ of $K$, containing $K$ and the set of subgroups $H$ of $G$, given by $E=K^H$. The field $E$ is Galois over $k$ if and only if $H$ is normal in $G$, and if that is the case, then the map $\sigma\rightarrow \sigma|_E$ induces an isomorphism
+    of $G/H$ onto the Galois group of $E$ over $k$.
+\end{theorem}
+
+
+
 \end{document}
