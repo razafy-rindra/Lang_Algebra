@@ -110,7 +110,7 @@ We define $G$ to be the \textbf{semidirect product} of $H$ and $N$ if $G=NH$ and
 \begin{exercise}
     \begin{enumerate}[label = (\alph*)]
         \item Let $H,N$ be normal subgroups of a finite group $G$. Assume that the orders of $H$ and $G$ are relatively prime. Prove that $xy=yx$ for all $x\in H$ and $y\in G$ and that $H\times N\simeq HN$
-        \item 
+        \item Let $H_1,\ldots,H_r$ be normal subgroups of $G$ such that the order of $H_i$ is relatively prime with the order of $H_j$ for $i\neq j$. Prove that \[H_1\times \ldots \times H_r = H_1\cdots H_r\]
     \end{enumerate}
     \begin{proof}
         \begin{enumerate}[label = (\alph*)]
@@ -131,7 +131,13 @@ We define $G$ to be the \textbf{semidirect product} of $H$ and $N$ if $G=NH$ and
                 f(h)(n) = h^{-1}nh = hh^{-1}n = n \text{ for all }h\in H \text{ and }n\in N
             \end{align*}
             So the map $f$ is trivial, so by $12b$:\[H\times N \simeq HN\]
-            \item 
+            \item  We will proceed by induction. The base case was shown in $(a)$, so assume this is true for all integers less than $r$.
+            
+            We have \[H_1\times \ldots \times H_{r-1}\simeq H_1\cdots H_{r-1}\]
+
+            So \[H_1\times \ldots \times H_{r-1}\times H_r \simeq H_1\cdots H_{r-1}\times H_r \]
+
+            Since $|H_1\cdots H_{r-1}| = |H_1\times \ldots \times H_{r-1}| = |H_1| \cdots |H_{r-1}|$, which is coprime to $|H_r|$ since $|H_r|$ is coprime to all $|H_j|$, with $j<r$. So using $(a)$ we get the desired result.
         \end{enumerate}
     \end{proof}
 \end{exercise}
