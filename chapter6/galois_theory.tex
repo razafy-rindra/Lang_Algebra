@@ -1,6 +1,22 @@
 \input{../template.tex}
+\usepackage{thmtools}
+
+\declaretheoremstyle[
+  headfont=\color{LimeGreen}\normalfont\bfseries,
+  bodyfont=\color{ForestGreen}\normalfont\itshape,
+]{colored}
+
+\declaretheorem[
+  style=colored,
+  name=Bergman,
+]{bergman}
 \newcommand{\Gal}{\text{Gal}}
+\newcommand{\Bergman}[1]{\textcolor{LimeGreen}{\textit{#1}}}
 \begin{document}
+Legend: Everything in \Bergman{green} is from the Bergman's Companion to Lang's Algebra.
+
+\
+
 In this chapter we will study the core of Galois theory, the group of automorphisms of a finite (and sometimes infinite) Galois extension at length.
     \section{Galois extensions}
 \begin{definition}
@@ -21,6 +37,41 @@ This is the main theorem of the Galois theory or finite Galois extensions.
     of $G/H$ onto the Galois group of $E$ over $k$.
 \end{theorem}
 
+\begin{theorem}
+    Let $K$ be a Galois extension of $k$. Let $G$ be its Galois group. Then $k=K^G$. If $F$ is an intermediate field, $k\subseteq F\subseteq K$, then $K$ is Galois over $F$. The map\[F\rightarrow \Gal(K/F)\]from the set of intermediate fields into the set of subgroups of $G$ is injective.
 
+    \begin{proof}
+        Let $\alpha\in K^G$. Let $\sigma$ be any embedding of $k(\alpha)$ in $K^a$, inducing the identity on $k$. Extend $\sigma$ to an embedding of $K$ into $K^a$, we also call this extension $\sigma$. Note since $K$ is normal, $\sigma$ is an automorphisms of $K$ over $k$ it is an element of $G$. Since $\alpha\in K^G$, $\sigma$ leaves $\alpha$ fixed. Therefore there is actually only one extension of $\sigma$ to an embedding of $K$ in $K^a$ (the identity). So:\[{[k(\alpha)\colon k]}_s = 1 \] 
+        Since $\alpha$ is seperable over $k$, $[k(\alpha)\colon k] = {[k(\alpha)\colon k]}_s = 1$, so $\alpha\in k$. This proves the first assertion.
+
+        \
+
+        Let $F$ be an intermediate field. Then $K$ is normal and seperable over $F$ by previous theorems from chapter five. Hence $K$ is Galois over $F$. If $H = \Gal(K/F)$ then by what we have proved above we conclude that $F = K^H$. Now we will show that the map defined in our statement is injective. Let $F,F'$ be intermediate fields such that $F\rightarrow \Gal{K/F} = H$ and $F'\rightarrow \Gal{K/F'} = H'$.
+
+        Assume that $H=H'$, then:\begin{equation*}
+            F = K^H = K^{H'} = F'
+        \end{equation*}
+    \end{proof}
+\end{theorem} 
+    \begin{definition}
+        We shall call the group $\Gal({K/F})$ of an intermediate field the group \textbf{associated} with $F$. We say that a subgroup $H$ of $G$ \textbf{belongs} to an intermediate field $F$ if $H = \Gal({K/F})$
+       \begin{bergman}
+        Note this does not mean that $H$ is the Galois group of $F$. For example the Galois group of the whole extension $K$ is $\Gal(K/F)$, $\{1\}$ is the subgroup belonging to $K$, since $\{1\} = \Gal(K/K)$.
+    \end{bergman}
+    \end{definition}
+
+\begin{corollary}
+    Let $K/k$ be Galois with group $G$. Let $F,F'$ be two intermediate fields, and let $H,H'$ be the subgroups of $G$ belonging to $F,F'$ respectively. Then $H\cap H'$ belongs to $FF'$.
+    \begin{proof}
+        Note every element of $H\cap H'$ leaves $FF'$ fixed (basically from how $FF'$ is constructed), and every element of $G$ which also leaves $FF'$ fixed also leaves $F$ and $F'$ fixed so lies in $H\cap H'$.
+    \end{proof}
+\end{corollary}
+
+\begin{corollary}
+    The fixed field of the smallest subgroup of $G$ containing $H$ and $H'$ is $F\cap F'$.
+    \begin{proof}
+        Recall that $H.H'$ are the subgroups of $G$ belonging to $F,F'$ respectively.
+    \end{proof} 
+\end{corollary}
 
 \end{document}
