@@ -141,4 +141,26 @@ We define $G$ to be the \textbf{semidirect product} of $H$ and $N$ if $G=NH$ and
         \end{enumerate}
     \end{proof}
 \end{exercise}
+\begin{exercise}
+    Let $G$ be a finite group and $N$ a normal subgroup such that $N$ and $G/N$ have relatively prime orders.
+    \begin{enumerate}[label = (\alph*)]
+        \item Let $H\leq G$, such that $|H| = |G/N|$. Prove that $G = HN$
+        \item Let $g$ be an automorphism of $G$. Prove that $g(N) = N$.
+    \end{enumerate}
+    \begin{proof}
+        \begin{enumerate}[label = (\alph*)]
+            \item  Note since $N$ is normal:\[|HN| = \frac{|H||N|}{|H\cap N|}\] By a previous question. But since the order of $N$ and $H$ are relatively prime, as we have seen this means $|H\cap N| = 1$.
+            So we have \begin{align*}
+                |HN| &= |H||N|\\
+                &= |G/N||N|\\
+                &= |G|
+            \end{align*}
+
+            So we see that $|HN| = |G|$, since $G$ is finite and $HN\subseteq G$, this means that $HN = G$.
+
+            \item Note since $g$ is an automorphism, $g(N)\trianglelefteq G$. Furthermore we have that for all $x\in G$, there is some $n\in N$ and $h\in H$ such that \[g^{-1}(x) = hn \Rightarrow x = g(h)g(n)\in g(H)g(N) \]
+            From this we conclude that: \[G = g(G) = g(H)g(N)\]
+        \end{enumerate}
+    \end{proof}
+\end{exercise}
 \end{document}
