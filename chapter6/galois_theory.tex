@@ -70,7 +70,15 @@ This is the main theorem of the Galois theory or finite Galois extensions.
 \begin{corollary}
     The fixed field of the smallest subgroup of $G$ containing $H$ and $H'$ is $F\cap F'$.
     \begin{proof}
-        Recall that $H.H'$ are the subgroups of $G$ belonging to $F,F'$ respectively.
+        Let $E$ be the smallest subgroup of $G$ containing $H$ and $H'$. Note this means that $E = \langle H\cup H' \rangle$. 
+        
+        Let $x\in K^E$. This means that \[\sigma(x) = x \text{ for all }\sigma\in E\]
+        Since $H,H'\subseteq E$ we see that $x\in K^H = F$ and $x\in K^{H'} = F'$. So $x\in F\cap F'$. On the other hand, if $x\in F\cap F'$, then for $\sigma\in E$ we have $\sigma = \tau_1\cdots \tau_n$, where $\tau_i\in H\cup H'$.
+
+        So \[\sigma(x) = \tau_1\circ\cdots \circ \tau_{n-1}\circ \tau_n(x) = \tau_1\circ\cdots \circ \tau_{n-1}(x) = x\] Since $\tau_i(x) =x$ for all $i$,
+
+        Therefore we indeed see that $F\cap F' = K^E$.
+
     \end{proof} 
 \end{corollary}
 
