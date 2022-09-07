@@ -1,6 +1,12 @@
 # Lang_Algebra
 Notes and solutions to Lang's Algebra.
+---------------
 
-Lecture Notes may look better with inverted colours. 
+# Lecture notes
+I am adding in the commentaries from Bergman's Lang companion, and inserting additional details to the proofs when Lang omits them. 
 
-Solutions are updated as I work through them.
+Notes are from chapter 6 onwards.
+
+
+# Solutions 
+Are updated as I work through them.
