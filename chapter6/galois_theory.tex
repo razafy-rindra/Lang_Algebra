@@ -1,5 +1,7 @@
 \input{../template.tex}
 \usepackage{thmtools}
+\usepackage{makeidx}
+\makeindex
 
 \declaretheoremstyle[
   headfont=\color{LimeGreen}\normalfont\bfseries,
@@ -19,11 +21,11 @@ Legend: Everything in \Bergman{green} is from the Bergman's Companion to Lang's 
 
 In this chapter we will study the core of Galois theory, the group of automorphisms of a finite (and sometimes infinite) Galois extension at length.
     \section{Galois extensions}
-\begin{definition}
+\begin{definition}\index{fixed field}
     Let $K$ be a field and let $G$ be a group of automorphisms of $K$. We let \[K^G = \{x\in K\mid x^\sigma = x \text{ for all }\sigma \in G\}\]We call this the \textbf{fixed field} of $G$. 
 \end{definition}
 
-\begin{definition}
+\begin{definition}\index{Galois group}
     An algebraic extension $K$ of a field $k$ is called \textbf{Galois} if it is normal and seperable.
 
     \
@@ -53,7 +55,7 @@ This is the main theorem of the Galois theory or finite Galois extensions.
         \end{equation*}
     \end{proof}
 \end{theorem} 
-    \begin{definition}
+    \begin{definition}\index{associated}\index{belongs to}
         We shall call the group $\Gal({K/F})$ of an intermediate field the group \textbf{associated} with $F$. We say that a subgroup $H$ of $G$ \textbf{belongs} to an intermediate field $F$ if $H = \Gal({K/F})$
        \begin{bergman}
         Note this does not mean that $H$ is the Galois group of $F$. For example the Galois group of the whole extension $K$ is $\Gal(K/F)$, $\{1\}$ is the subgroup belonging to $K$, since $\{1\} = \Gal(K/K)$.
@@ -75,11 +77,63 @@ This is the main theorem of the Galois theory or finite Galois extensions.
         Let $x\in K^E$. This means that \[\sigma(x) = x \text{ for all }\sigma\in E\]
         Since $H,H'\subseteq E$ we see that $x\in K^H = F$ and $x\in K^{H'} = F'$. So $x\in F\cap F'$. On the other hand, if $x\in F\cap F'$, then for $\sigma\in E$ we have $\sigma = \tau_1\cdots \tau_n$, where $\tau_i\in H\cup H'$.
 
-        So \[\sigma(x) = \tau_1\circ\cdots \circ \tau_{n-1}\circ \tau_n(x) = \tau_1\circ\cdots \circ \tau_{n-1}(x) = x\] Since $\tau_i(x) =x$ for all $i$,
+        So \[\sigma(x) = \tau_1\circ\cdots \circ \tau_{n-1}\circ \tau_n(x) = \tau_1\circ\cdots \circ \tau_{n-1}(x) = \ldots = x\] Since $\tau_i(x) =x$ for all $i$,
 
         Therefore we indeed see that $F\cap F' = K^E$.
-
     \end{proof} 
 \end{corollary}
+\begin{corollary}
+    $F\subseteq F'$ if and only if $H'\subseteq H$
 
+    \begin{proof}
+        If $F\subseteq F'$ and $\sigma\in H'$ leaves $F'$ fixed, then $\sigma$ leaves $F$ fixed, so $\sigma\in H$. So $H'\subseteq H$.
+
+        \
+
+        Conversely if $H'\subseteq H$, then $F = K^{H}\subseteq K^{H'} = F'$. 
+    \end{proof}
+\end{corollary}
+
+\begin{corollary}
+    Let $E$ be a finite seperable extension of a field $k$. Let $K$ be the smallest normal extension of $k$ containing $E$. Then $K$ is finite Galois over $k$. There is only a finite number of intermediate fields $F$ such that $k\subseteq F\subseteq E$.
+
+    \begin{proof}
+        Note $K$ is the compositum of a the finite number of conjugates of $E$, i.e \[
+            K = (\sigma_1 E)\cdots (\sigma_n E) \text{ where }\sigma_i\text{ are the distinct embeddings of }E\text{ into }E^a    
+        \] Therefore it is normal(by definition), seperable(since $E$ is) and it is finite over $k$.
+
+        \
+
+        The Galois group $K/k$ has only a finite number of subgroups. So there is only a finite number of subfields of $K$ containing $k$, so a finite number of subfields of $E$ containing $k$.
+    \end{proof}
+\end{corollary}
+
+\begin{lemma}\label{1.7}
+    Let $E$ be an algebraic seperable extension of $k$. Assume that there is an integer $n\geq 1$ such that every element $\alpha\in E$ is of degree $\leq n$ over $k$. Then $E$ is finite over $k$ and $[E\colon k]\leq n$.
+
+    \begin{proof}
+        Let $\alpha\in E$ be such that $m = [k(\alpha)\colon k]\leq n$ is maximal. Assume that, there exists $\beta\in E\setminus k(\alpha)$, then since $k(\alpha,\beta)$ is seperable and finite over $k$ by the primitive element theorem there is a $\gamma\in k(\alpha,\beta)\subseteq E$ such that:
+
+        \[ [k(\gamma)\colon k] = [k(\alpha,\beta)\colon k] > m \] Which contradicts our assumption that $\alpha$ had maximal degree in $E$. Therefore $E\setminus k(\alpha) = \emptyset\Rightarrow E = k(\alpha)$,
+
+        So it is finite over $k$ and $[E\colon k]\leq n$.
+    \end{proof}
+\end{lemma}
+
+\begin{theorem}\textbf{Artin}
+    Let $K$ be a field and let $G$ be a finite group of automorphisms of $K$, of order $n$. Let $k = K^G$ be the fixed field. Then $K$ is a finite Galois extension of $k$, and its Galois group is $G$. We have $[K\colon k] = n$,
+
+    \begin{proof}
+        Let $\alpha\in K$ and let $\sigma_1,\ldots,\sigma_r$ be a maximal set of elements of $G$ such that $\sigma_1\alpha,\ldots,\sigma_r\alpha$ are distinct. If $\tau\in G$ then for all $i$, there is a $\xi\in S_r$ such that\[\tau\sigma_i\alpha = \sigma_{\xi(i)}\alpha\]
+    
+        Indeed $\tau\sigma_i\alpha\in \{\sigma_1\alpha,\ldots,\sigma_r\alpha\}$, by maximality. And since $\tau$ is injective, $\tau\sigma_i\alpha = \tau\sigma_j\alpha\iff \sigma_i\alpha = \sigma_j\alpha$.
+  
+        So not only is $\alpha$ the root of a polynomial \[f(X) = \prod_{i=1}^r (X-\sigma_i\alpha) \text{ and }\forall \tau\in G \text{, }f^\tau = f \]
+
+        So the coefficients of $f$ are in $K^G = k$. Furthermore, $f$ is seperable since all the $\sigma_i\alpha$ are distinct. So every element $\alpha\in K$ is the root of a seperable polynomial of degree $\leq n$ with coeffs in $k$. We also see that this polynomial splits into linear factors in $K$, so $K$ is seperable and normal (hence Galois) over $k$.
+
+        By lemma~\ref{1.7} we see that $[K\colon k]\leq n$. But recall from chapter $5$, the Galois group of $K$ over $k$ has order $\leq [K\colon k]$. Since $G\subseteq \Gal(K/k)$, but $n = |G| \leq |\Gal(K/k)|\leq [K\colon k]\leq n$, we see that $G = \Gal(K/k)$, and $[K\colon k] = n$. 
+    \end{proof}
+ \end{theorem}
+\printindex
 \end{document}
