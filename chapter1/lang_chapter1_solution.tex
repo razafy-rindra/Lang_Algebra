@@ -158,8 +158,28 @@ We define $G$ to be the \textbf{semidirect product} of $H$ and $N$ if $G=NH$ and
 
             So we see that $|HN| = |G|$, since $G$ is finite and $HN\subseteq G$, this means that $HN = G$.
 
-            \item Note since $g$ is an automorphism, $g(N)\trianglelefteq G$. Furthermore we have that for all $x\in G$, there is some $n\in N$ and $h\in H$ such that \[g^{-1}(x) = hn \Rightarrow x = g(h)g(n)\in g(H)g(N) \]
-            From this we conclude that: \[G = g(G) = g(H)g(N)\]
+            \item \begin{lemma}
+                If $H\leq G$ is such that $|H| = |N|$, then $H = N$
+                \begin{proof}
+                    Let \[\varphi\colon G\rightarrow G/N\] be the canonical homomorphism.
+
+                    \
+
+                    We note that $\varphi(HN) = HN/N\leq G/N$, we have:\begin{equation}
+                       |H/(H\cap N)| = |HN/N| \mid |G/N|
+                    \end{equation}
+
+                    So let $m\in \N$:\[
+                        \frac{|H|}{|H\cap N|}m = |G/N| \Rightarrow |N|m = |H|m = |G/N||H\cap N|
+                    \]
+
+                    Now let $p$ be a prime divisor of $|N|$, then $p\mid |G/N||H\cap N|$, since $p\nmid |G/N|$ and $p$ is prime we see that: $p\mid |H\cap N|$.
+
+                    So all prime divisors of $|N|$ divide $|H\cap N|$, therefore $|N|\mid |H\cap N|$ but since $|H\cap N|\leq |N|$ this implies that $|H\cap N| = |N|$ so $H\subseteq N$. Likewise we can see that $N\subseteq H$. So $H = N$.
+                \end{proof}
+            \end{lemma}
+
+            Now let $g$ be an automorphism of $G$. So we know that $g(N)\leq G$ and $|g(N)| = |N|$. So by the lemma $g(N) = N$. 
         \end{enumerate}
     \end{proof}
 \end{exercise}
