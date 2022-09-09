@@ -12,7 +12,7 @@
   style=colored,
   name=Bergman,
 ]{bergman}
-\newcommand{\Gal}{\text{Gal}}
+\newcommand{\Gal}[1]{\text{Gal}(#1)}
 \newcommand{\Bergman}[1]{\textcolor{LimeGreen}{\textit{#1}}}
 \begin{document}
 Legend: Everything in \Bergman{green} is from the Bergman's Companion to Lang's Algebra.
@@ -35,11 +35,11 @@ In this chapter we will study the core of Galois theory, the group of automorphi
 
 This is the main theorem of the Galois theory or finite Galois extensions.
 \begin{theorem}\label{main}
-    Let $K$ be a finite Galois extension of $k$, with Galois group $G$. There is a bijection between the set of subfields $E$ of $K$, containing $K$ and the set of subgroups $H$ of $G$, given by $E=K^H$. The field $E$ is Galois over $k$ if and only if $H$ is normal in $G$, and if that is the case, then the map $\sigma\rightarrow \sigma|_E$ induces an isomorphism
+    Let $K$ be a finite Galois extension of $k$, with Galois group $G$. There is a bijection between the set of subfields $E$ of $K$, containing $k$ and the set of subgroups $H$ of $G$, given by $E=K^H$. The field $E$ is Galois over $k$ if and only if $H$ is normal in $G$, and if that is the case, then the map $\sigma\rightarrow \sigma|_E$ induces an isomorphism
     of $G/H$ onto the Galois group of $E$ over $k$.
 \end{theorem}
 
-\begin{theorem}
+\begin{theorem}\label{1.2}
     Let $K$ be a Galois extension of $k$. Let $G$ be its Galois group. Then $k=K^G$. If $F$ is an intermediate field, $k\subseteq F\subseteq K$, then $K$ is Galois over $F$. The map\[F\rightarrow \Gal(K/F)\]from the set of intermediate fields into the set of subgroups of $G$ is injective.
 
     \begin{proof}
@@ -135,5 +135,55 @@ This is the main theorem of the Galois theory or finite Galois extensions.
         By lemma~\ref{1.7} we see that $[K\colon k]\leq n$. But recall from chapter $5$, the Galois group of $K$ over $k$ has order $\leq [K\colon k]$. Since $G\subseteq \Gal(K/k)$, but $n = |G| \leq |\Gal(K/k)|\leq [K\colon k]\leq n$, we see that $G = \Gal(K/k)$, and $[K\colon k] = n$. 
     \end{proof}
  \end{theorem}
+\begin{corollary}
+    Let $K$ be a finite Galois extension of $k$ and elt $G$ be its Galois groiup. Then every subgroup of $G$ belongs to some subfield $F$ such that $k\subseteq F\subseteq K$.
+    \begin{proof}
+        Let $H\leq G$, and $F=K^H$, then by Artin $K$ is a finite Galois extension of $F$ and $\Gal{K/F} = H$.
+    \end{proof}
+\end{corollary}
+\begin{bergman}
+    Combining this corollary and theorem~\ref{1.2}, tells us that we have a bijection between the set of subfields of $K$ containing $k$ and the set of subgroups of $G$. i.e, the first assertion in theorem~\ref{main}
+    
+    \
+
+    This is called the \textbf{Fundamental Theorem of Galois Theory}
+\end{bergman}
+
+\begin{remark}
+    This only covers the finite case, if $K$ is an infinite Galois extension of $k$ we need to do more work.
+\end{remark}
+
+Let $K$ be a Galois extension of $k$. Let \[\lambda\colon K\rightarrow \lambda K \text{ be an isomorphism}\]
+Then $\lambda K$ is a Galois extension of $\lambda k$. Let $G$ be the Galois groupnof $K$ over $k$. Then the map\[
+        \sigma\rightarrow \lambda \sigma \lambda^{-1}    
+\] 
+
+Gives a homomorphism of $G$ into $\Gal{\lambda K/\lambda k}$. Furthermore this homomorphism has an iverse given by \[\lambda^{-1}\tau\lambda\rightarrow \tau \]
+
+Therefore these two groups are isomorphic and we write:\[
+    {G(\lambda K/\lambda k)}^\lambda = G(K/k) \text{ or } {G(\lambda K/\lambda k)} = \lambda G(K/k) \lambda^{-1}
+\]
+
+Where $\lambda$ is ``conjugation'' such that\[
+    \sigma^\lambda = \lambda^{-1}\sigma\lambda \text{ where we have the property} {(\sigma^\lambda)}^\omega = \sigma^{\lambda\omega}    
+\]
+\begin{bergman}
+    Note we may write $^\lambda\sigma = \lambda\sigma\lambda^{-1}$, and then $^\lambda(^\omega \sigma) = \lambda(^\omega \sigma)\lambda^{-1} = \lambda\omega \sigma\omega^{-1}\lambda^{-1} = ^{\lambda\omega}\sigma$
+\end{bergman}
+
+
+In particular, let $F$ be an intermediate field, $k\subseteq F\subseteq K$, and let $\lambda\colon F\rightarrow \lambda F$ be an embedding of $F$ in $K$, which we extend to an automorphisms of $K$. Then $\lambda K = K$ and \[
+        \Gal{K/\lambda F}^\lambda = \Gal{K/F}    
+\]
+
+\begin{theorem}\label{1.10}
+    Let $K$ be a Galois extension of $k$ with group $G$. Let $F$ be a subfield, $k\subseteq F\subseteq K$ and let $H=\Gal{K/F}$. Then $F$ is normal over $k$ if and only if $H$ is normal in $G$.
+
+    If $F$ is normal over $k$, then the restriction map $\sigma\rightarrow \sigma|_F$ is a homomorphism of $G$ onto the Galois group of $F$ over $k$, whose kernel is $H$. We thus have \[
+        \Gal{F/k} \simeq G/H    
+    \]
+\end{theorem}
+
+
 \printindex
 \end{document}

@@ -1,0 +1,181 @@
+
+\paragraph*{Part 2: Semidirect product}
+We define $G$ to be the \textbf{semidirect product} of $H$ and $N$ if $G=NH$ and $H\cap N = \{e\}$.
+
+
+\begin{exercise}
+    Let $G$ be a group and let $H,N$ be subgroups with $N$ normal. Let $\gamma_x$ be conjugation by an element $x\in G$.\begin{enumerate}[label = (\alph*)]
+        \item Show that $x\rightarrow \gamma_x$ induces a homomorphism $f\colon H\rightarrow \text{Aut}(N)$
+        \item If $H\cap N = \{e\}$, show that the map $H\times N\rightarrow HN$ given by $(x,y) \rightarrow xy$ is a bijection, and that this map is an isomorphism if and only if $f$ (from part $(a)$) is trivial.
+        \item Conversely, let $N,H$ be groups and let $\psi\colon H\rightarrow \text{Aut}(N)$ be a given homomorphism. Let $G$ be the set of pairs $(x,h)$ with $x\in N$ and $h\in H$ and define a composition law:\begin{equation*}
+            (x_1,h_1)(x_2,h_2) = ({x_1}{\varphi(h_1)x_2}, h_1h_2)
+        \end{equation*}
+        Show that this is a group law, and yields a semidirect product of $N$ and $H$, identifying $N$ with the set of elements $(x,1)$ and $H$ with the set of elements $(1,h)$.
+    \end{enumerate}
+    \begin{proof}
+        \begin{enumerate}[label = (\alph*)]
+            \item We will first show that for all $x\in G$ we have $\gamma_x|_N\in \text{Aut}(N)$, first of all recall that $\gamma_x|_N\colon N\rightarrow G$ is indeed a homomorphism. Now let $y\in \text{ker}(\gamma_x)$ then:
+            \[
+                \gamma_x(y) = xyx^{-1} = e \Rightarrow xy = x \Rightarrow y = e
+                \]
+                So this is injective, finally since $N$ is a normal subgroup of $G$, we see that $\gamma_x(N) = xNx^{-1} = N$, so this function is indeed an automorphism.
+
+                \
+
+                So we define our function $f\colon H\rightarrow \text{Aut}(N)$, by $f(x) = \gamma_x$ for all $x\in H$. Let $x,y\in H$, for all $n\in N$ we have \begin{align*}
+                    f(xy)(n) &= \gamma_{xy}(n)\\
+                             &= xyny^{-1}x^{-1}\\
+                             &= x({f(y)(n)})x^{-1}\\
+                             &=({f(x)\circ f(y)})(n)
+                \end{align*}
+
+                This function is indeed a homomorphism.
+                \newline $\square$
+                \item Let \[g\colon H\times N\rightarrow HN \text{ be given by }(x,y) \rightarrow xy\]
+                
+                Since $HN = \{hn\mid h\in H\text{ and }n\in N\}$, this map is clearly surjective. Now assume that $g(x,y) = g(z,w)$, then we have:\begin{equation*}
+                    xy=zw \Rightarrow \underbrace{z^{-1}x}_{\in H} = \underbrace{wy^{-1}}_{\in N}\in H \cap N = \{e\}
+                \end{equation*}
+
+                So $x=z$ and $y=w$, so $(x,y)=(z,w)$. So this function is injective, and so a bijection.
+
+                \begin{itemize}
+                    \item $(\Rightarrow)$ Assume that this map is also an isomorphism, then we have for all $x,z\in H$ and $y,w\in N$ \begin{align*}
+                        xzyw &= g(xz,yw)\\
+                            &= g((x,y)(z,w))\\
+                            &= (xy)(zw)
+                    \end{align*}
+    
+                    Therefore, $zy = yz$ for all $z\in H$ and $y\in N$, which means that:\begin{equation*}
+                        f(z)(y) = zyz^{-1} = y \text{ for all }y\in N\text{ and }z\in H \Rightarrow f(z) = \text{id} \text{ for all }z\in H
+                    \end{equation*}
+    
+                    So $f$ is trivial.
+                    \item $(\Leftarrow)$ Assume that $f$ is trivial. Therefore we have for all $x,z\in H$ and $y,w\in N$:\begin{align*}
+                        g((x,y)(z,w)) &= g(xz,yw)\\
+                        &= xzyw\\
+                        &= x(zyz^{-1})zw\\
+                        &= x(f_z(y))zw\\
+                        &= xyzw\\
+                        &= g(x,y)g(z,w)
+                    \end{align*}
+
+                    So this $g$ is indeed a homomorphism, and so a isomorphism. 
+                \end{itemize}
+                \item First of all we will show that this composition law is associative:\begin{align*}
+                    ((x_1,h_1)(x_2,h_2))(x_3,h_3) &= ({x_1}{\psi(h_1)x_2}, h_1h_2)(x_3,h_3)\\
+                    &= (({x_1}{\psi(h_1)x_2}){\psi(h_1h_2)x_3}, (h_1h_2)h_3)\\
+                    &= ({x_1}\psi(h_1)({x_2}{\psi(h_2)x_3}), h_1(h_2h_3))\\
+                    &=(x_1,h_1)({x_2}{\psi(h_2)x_3}, h_2h_3)\\
+                    &=(x_1,h_1)((x_2,h_2)(x_3,h_3))
+                \end{align*}
+
+                Now for all $(x,h)\in N\times H$ we have:\begin{equation*}
+                    (e_N,e_H)(x,h) = (e_N\psi(e_H)x,{e_H}h) = (x,h) = (x\psi(h)(e_N),h{e_H}) = (x,h)(e_N,e_H) 
+                \end{equation*}
+
+                and \begin{equation*}
+                    (x,h)(\psi(h^{-1})x^{-1},h^{-1}) = (x\psi(e_H)(x^{-1}),e_H) = (e_N,e_H)
+                \end{equation*}
+
+                So this is in deed a group law.
+
+                \
+
+                Now let $N = \{(x,1)\in G\}$ and $H = \{(1,x)\in G\}$, it is clear that these are subgroups of $G$ by how we defined multiplication and inverses.
+                 We first need to show that $N\trianglelefteq G$:
+                Let $(x,1)\in N$ and $(n,h)\in G$, then we have:\begin{align*}
+                    (\psi(h^{-1})n^{-1},h^{-1})(x,1)(n,h) &= (\psi(h^{-1})n^{-1}\psi(1)x, h^{-1})(n,h)\\
+                        &=  (\psi(h^{-1})n^{-1} x \psi(h)n, 1) \in N
+                \end{align*}
+
+                So we indeed see that $N$ is normal.
+
+                \
+
+                Also notice that $N\cap H = \{(1,1)\}$, by how they are defined. So we only need to show that $G = NH$.
+                
+                Let $(n,h)\in G$:\begin{align*}
+                    (n,1)(1,h) &= (n\psi(1)1, 1h) = (n,h)
+                \end{align*}
+                So we indeed see $G\subseteq NH$, the other inclusion is trivial. So this group law indeed yields a semidirect product of $N$ and $H$.
+            \end{enumerate}    
+    \end{proof}
+\end{exercise}
+
+\begin{exercise}
+    \begin{enumerate}[label = (\alph*)]
+        \item Let $H,N$ be normal subgroups of a finite group $G$. Assume that the orders of $H$ and $G$ are relatively prime. Prove that $xy=yx$ for all $x\in H$ and $y\in G$ and that $H\times N\simeq HN$
+        \item Let $H_1,\ldots,H_r$ be normal subgroups of $G$ such that the order of $H_i$ is relatively prime with the order of $H_j$ for $i\neq j$. Prove that \[H_1\times \ldots \times H_r = H_1\cdots H_r\]
+    \end{enumerate}
+    \begin{proof}
+        \begin{enumerate}[label = (\alph*)]
+            \item First of all recall that since $H\cap N\leq H$ and $H\cap N\leq N$, we see that $|H\cap N| \mid |H|$ ane $|H\cap N|\mid |N|$, so $|H\cap N| = 1$, since $\gcd(|H|,|N|) = 1$. So $|H|cap N| = \{e\}$.
+            
+            Now since $H,N$ are normal subgroups of $G$, for $x\in N$ and $y\in H$:\begin{equation*}
+                xyx^{-1}\in H \Rightarrow (xyx^{-1})y^{-1}\in H
+            \end{equation*}
+            And \begin{equation*}
+                yx^{-1}y^{-1}\in N \Rightarrow x(yx^{-1}y^{-1})\in N
+            \end{equation*}
+
+            so $xyx^{-1}y^{-1}\in H\cap N = \{e\} \Rightarrow xy = yx$.
+
+            \
+
+            Now let $\gamma_x$ be conjugation by an element $x\in G$ and let $f\colon H\rightarrow \text{Aut}(N)$ be the induced map. Then we have:\begin{align*}
+                f(h)(n) = h^{-1}nh = hh^{-1}n = n \text{ for all }h\in H \text{ and }n\in N
+            \end{align*}
+            So the map $f$ is trivial, so by $12b$:\[H\times N \simeq HN\]
+            \item  We will proceed by induction. The base case was shown in $(a)$, so assume this is true for all integers less than $r$.
+            
+            We have \[H_1\times \ldots \times H_{r-1}\simeq H_1\cdots H_{r-1}\]
+
+            So \[H_1\times \ldots \times H_{r-1}\times H_r \simeq H_1\cdots H_{r-1}\times H_r \]
+
+            Since $|H_1\cdots H_{r-1}| = |H_1\times \ldots \times H_{r-1}| = |H_1| \cdots |H_{r-1}|$, which is coprime to $|H_r|$ since $|H_r|$ is coprime to all $|H_j|$, with $j<r$. So using $(a)$ we get the desired result.
+        \end{enumerate}
+    \end{proof}
+\end{exercise}
+\begin{exercise}
+    Let $G$ be a finite group and $N$ a normal subgroup such that $N$ and $G/N$ have relatively prime orders.
+    \begin{enumerate}[label = (\alph*)]
+        \item Let $H\leq G$, such that $|H| = |G/N|$. Prove that $G = HN$
+        \item Let $g$ be an automorphism of $G$. Prove that $g(N) = N$.
+    \end{enumerate}
+    \begin{proof}
+        \begin{enumerate}[label = (\alph*)]
+            \item  Note since $N$ is normal:\[|HN| = \frac{|H||N|}{|H\cap N|}\] By a previous question. But since the order of $N$ and $H$ are relatively prime, as we have seen this means $|H\cap N| = 1$.
+            So we have \begin{align*}
+                |HN| &= |H||N|\\
+                &= |G/N||N|\\
+                &= |G|
+            \end{align*}
+
+            So we see that $|HN| = |G|$, since $G$ is finite and $HN\subseteq G$, this means that $HN = G$.
+
+            \item \begin{lemma}
+                If $H\leq G$ is such that $|H| = |N|$, then $H = N$
+                \begin{proof}
+                    Let \[\varphi\colon G\rightarrow G/N\] be the canonical homomorphism.
+
+                    \
+
+                    We note that $\varphi(HN) = HN/N\leq G/N$, we have:\begin{equation}
+                       |H/(H\cap N)| = |HN/N| \mid |G/N|
+                    \end{equation}
+
+                    So let $m\in \N$:\[
+                        \frac{|H|}{|H\cap N|}m = |G/N| \Rightarrow |N|m = |H|m = |G/N||H\cap N|
+                    \]
+
+                    Now let $p$ be a prime divisor of $|N|$, then $p\mid |G/N||H\cap N|$, since $p\nmid |G/N|$ and $p$ is prime we see that: $p\mid |H\cap N|$.
+
+                    So all prime divisors of $|N|$ divide $|H\cap N|$, therefore $|N|\mid |H\cap N|$ but since $|H\cap N|\leq |N|$ this implies that $|H\cap N| = |N|$ so $H\subseteq N$. Likewise we can see that $N\subseteq H$. So $H = N$.
+                \end{proof}
+            \end{lemma}
+
+            Now let $g$ be an automorphism of $G$. So we know that $g(N)\leq G$ and $|g(N)| = |N|$. So by the lemma $g(N) = N$. 
+        \end{enumerate}
+    \end{proof}
+\end{exercise}
