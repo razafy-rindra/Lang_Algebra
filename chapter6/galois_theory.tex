@@ -14,343 +14,78 @@
 ]{bergman}
 \newcommand{\Gal}[1]{\text{Gal}(#1)}
 \newcommand{\Bergman}[1]{\textcolor{LimeGreen}{\textit{#1}}}
+
+
 \begin{document}
-Legend: Everything in \Bergman{green} is from the Bergman's Companion to Lang's Algebra.
+  \input{part_1}
+  \paragraph*{Galois connections}
 
-\
+  \begin{bergman}
+    The FTG is an example of a general type of mathematical situation
+    \begin{definition}
+      Let $S,T$ be sets and $R\subseteq S\times T$ be a binary relation on them. For every subset $X\subseteq S$ we define \[
+        X^\ast = \{t\in T\mid (\forall s\in X), \ (s,t)\in R\}\subseteq T  
+      \]
+      And likewise for every subset $Y\subseteq T$ we define\[
+        Y^\ast = \{s\in S\mid (\forall t\in Y), \ (s,t)\in R\}\subseteq S  
+      \] 
 
-In this chapter we will study the core of Galois theory, the group of automorphisms of a finite (and sometimes infinite) Galois extension at length.
-    \section{Galois extensions}
-\begin{definition}\index{fixed field}
-    Let $K$ be a field and let $G$ be a group of automorphisms of $K$. We let \[K^G = \{x\in K\mid x^\sigma = x \text{ for all }\sigma \in G\}\]We call this the \textbf{fixed field} of $G$. 
-\end{definition}
-
-\begin{definition}\index{Galois group}
-    An algebraic extension $K$ of a field $k$ is called \textbf{Galois} if it is normal and seperable.
-
-    \
-
-    The group of automorphisms of $K$ over $k$ is called the \textbf{Galois group} of $K$ over $k$, and is denoted $G(K/k), \ G_{K/k}, \ \Gal{K/k}$ or simply $G$.
-\end{definition}
-
-This is the main theorem of the Galois theory or finite Galois extensions.
-\begin{theorem}\label{main}
-    Let $K$ be a finite Galois extension of $k$, with Galois group $G$. There is a bijection between the set of subfields $E$ of $K$, containing $k$ and the set of subgroups $H$ of $G$, given by $E=K^H$. The field $E$ is Galois over $k$ if and only if $H$ is normal in $G$, and if that is the case, then the map $\sigma\rightarrow \sigma|_E$ induces an isomorphism
-    of $G/H$ onto the Galois group of $E$ over $k$.
-\end{theorem}
-
-\begin{theorem}\label{1.2}
-    Let $K$ be a Galois extension of $k$. Let $G$ be its Galois group. Then $k=K^G$. If $F$ is an intermediate field, $k\subseteq F\subseteq K$, then $K$ is Galois over $F$. The map\[F\rightarrow \Gal{K/F}\]from the set of intermediate fields into the set of subgroups of $G$ is injective.
-
-    \begin{proof}
-        Let $\alpha\in K^G$. Let $\sigma$ be any embedding of $k(\alpha)$ in $K^a$, inducing the identity on $k$. Extend $\sigma$ to an embedding of $K$ into $K^a$, we also call this extension $\sigma$. Note since $K$ is normal, $\sigma$ is an automorphisms of $K$ over $k$ it is an element of $G$. Since $\alpha\in K^G$, $\sigma$ leaves $\alpha$ fixed. Therefore there is actually only one extension of $\sigma$ to an embedding of $K$ in $K^a$ (the identity). So:\[{[k(\alpha)\colon k]}_s = 1 \] 
-        Since $\alpha$ is seperable over $k$, $[k(\alpha)\colon k] = {[k(\alpha)\colon k]}_s = 1$, so $\alpha\in k$. This proves the first assertion.
-
-        \
-
-        Let $F$ be an intermediate field. Then $K$ is normal and seperable over $F$ by previous theorems from chapter five. Hence $K$ is Galois over $F$. If $H = \Gal{K/F}$ then by what we have proved above we conclude that $F = K^H$. Now we will show that the map defined in our statement is injective. Let $F,F'$ be intermediate fields such that $F\rightarrow \Gal{K/F} = H$ and $F'\rightarrow \Gal{K/F'} = H'$.
-
-        Assume that $H=H'$, then:\begin{equation*}
-            F = K^H = K^{H'} = F'
-        \end{equation*}
-    \end{proof}
-\end{theorem} 
-    \begin{definition}\index{associated}\index{belongs to}
-        We shall call the group $\Gal{K/F}$ of an intermediate field the group \textbf{associated} with $F$. We say that a subgroup $H$ of $G$ \textbf{belongs} to an intermediate field $F$ if $H = \Gal{K/F}$
-       \begin{bergman}
-        Note this does not mean that $H$ is the Galois group of $F$. For example the Galois group of the whole extension $K$ is $\Gal{K/F}$, $\{1\}$ is the subgroup belonging to $K$, since $\{1\} = \Gal(K/K)$.
-    \end{bergman}
+      These operators constitute what is called the \textbf{Galois connection} between $S$ and $T$.
     \end{definition}
-
-\begin{corollary}
-    Let $K/k$ be Galois with group $G$. Let $F,F'$ be two intermediate fields, and let $H,H'$ be the subgroups of $G$ belonging to $F,F'$ respectively. Then $H\cap H'$ belongs to $FF'$.
-    \begin{proof}
-        Note every element of $H\cap H'$ leaves $FF'$ fixed (basically from how $FF'$ is constructed), and every element of $G$ which also leaves $FF'$ fixed also leaves $F$ and $F'$ fixed so lies in $H\cap H'$.
-    \end{proof}
-\end{corollary}
-
-\begin{corollary}
-    The fixed field of the smallest subgroup of $G$ containing $H$ and $H'$ is $F\cap F'$.
-    \begin{proof}
-        Let $E$ be the smallest subgroup of $G$ containing $H$ and $H'$. Note this means that $E = \langle H\cup H' \rangle$. 
-        
-        Let $x\in K^E$. This means that \[\sigma(x) = x \text{ for all }\sigma\in E\]
-        Since $H,H'\subseteq E$ we see that $x\in K^H = F$ and $x\in K^{H'} = F'$. So $x\in F\cap F'$. On the other hand, if $x\in F\cap F'$, then for $\sigma\in E$ we have $\sigma = \tau_1\cdots \tau_n$, where $\tau_i\in H\cup H'$.
-
-        So \[\sigma(x) = \tau_1\circ\cdots \circ \tau_{n-1}\circ \tau_n(x) = \tau_1\circ\cdots \circ \tau_{n-1}(x) = \ldots = x\] Since $\tau_i(x) =x$ for all $i$,
-
-        Therefore we indeed see that $F\cap F' = K^E$.
-    \end{proof} 
-\end{corollary}
-\begin{corollary}
-    $F\subseteq F'$ if and only if $H'\subseteq H$
-
-    \begin{proof}
-        If $F\subseteq F'$ and $\sigma\in H'$ leaves $F'$ fixed, then $\sigma$ leaves $F$ fixed, so $\sigma\in H$. So $H'\subseteq H$.
-
-        \
-
-        Conversely if $H'\subseteq H$, then $F = K^{H}\subseteq K^{H'} = F'$. 
-    \end{proof}
-\end{corollary}
-
-\begin{corollary}
-    Let $E$ be a finite seperable extension of a field $k$. Let $K$ be the smallest normal extension of $k$ containing $E$. Then $K$ is finite Galois over $k$. There is only a finite number of intermediate fields $F$ such that $k\subseteq F\subseteq E$.
-
-    \begin{proof}
-        Note $K$ is the compositum of a the finite number of conjugates of $E$, i.e \[
-            K = (\sigma_1 E)\cdots (\sigma_n E) \text{ where }\sigma_i\text{ are the distinct embeddings of }E\text{ into }E^a    
-        \] Therefore it is normal(by definition), seperable(since $E$ is) and it is finite over $k$.
-
-        \
-
-        The Galois group $K/k$ has only a finite number of subgroups. So there is only a finite number of subfields of $K$ containing $k$, so a finite number of subfields of $E$ containing $k$.
-    \end{proof}
-\end{corollary}
-
-\begin{lemma}\label{1.7}
-    Let $E$ be an algebraic seperable extension of $k$. Assume that there is an integer $n\geq 1$ such that every element $\alpha\in E$ is of degree $\leq n$ over $k$. Then $E$ is finite over $k$ and $[E\colon k]\leq n$.
-
-    \begin{proof}
-        Let $\alpha\in E$ be such that $m = [k(\alpha)\colon k]\leq n$ is maximal. Assume that, there exists $\beta\in E\setminus k(\alpha)$, then since $k(\alpha,\beta)$ is seperable and finite over $k$ by the primitive element theorem there is a $\gamma\in k(\alpha,\beta)\subseteq E$ such that:
-
-        \[ [k(\gamma)\colon k] = [k(\alpha,\beta)\colon k] > m \] Which contradicts our assumption that $\alpha$ had maximal degree in $E$. Therefore $E\setminus k(\alpha) = \emptyset\Rightarrow E = k(\alpha)$,
-
-        So it is finite over $k$ and $[E\colon k]\leq n$.
-    \end{proof}
-\end{lemma}
-
-\begin{theorem}\textbf{Artin}\label{1.8}
-    Let $K$ be a field and let $G$ be a finite group of automorphisms of $K$, of order $n$. Let $k = K^G$ be the fixed field. Then $K$ is a finite Galois extension of $k$, and its Galois group is $G$. We have $[K\colon k] = n$,
-
-    \begin{proof}
-        Let $\alpha\in K$ and let $\sigma_1,\ldots,\sigma_r$ be a maximal set of elements of $G$ such that $\sigma_1\alpha,\ldots,\sigma_r\alpha$ are distinct. If $\tau\in G$ then for all $i$, there is a $\xi\in S_r$ such that\[\tau\sigma_i\alpha = \sigma_{\xi(i)}\alpha\]
-    
-        Indeed $\tau\sigma_i\alpha\in \{\sigma_1\alpha,\ldots,\sigma_r\alpha\}$, by maximality. And since $\tau$ is injective, $\tau\sigma_i\alpha = \tau\sigma_j\alpha\iff \sigma_i\alpha = \sigma_j\alpha$.
+    So note in our case, $S$ is an extension field $K$ of $k$, $T = \Gal{K/k}$ and $R$ is the relation \[\{(x,\sigma)\in K\times \Gal{K/k}\mid \sigma(x) = x \}\]
   
-        So not only is $\alpha$ the root of a polynomial \[f(X) = \prod_{i=1}^r (X-\sigma_i\alpha) \text{ and }\forall \tau\in G \text{, }f^\tau = f \]
+  \begin{Properties}
+    \item $X\subseteq X' \Rightarrow X^\ast \supseteq X'^\ast$
+    \item The operators $\ast\ast$ from $P(S)\rightarrow P(S)$ and  $P(T)\rightarrow P(T)$, are the \textit{closure operators} on $S$ and $T$, i.e.\begin{itemize}
+      \item $X\subseteq X^{\ast\ast}$
+      \item $X\subseteq Y\Rightarrow X^{\ast\ast}\subseteq Y^{\ast\ast}$
+      \item ${(X^{\ast\ast})}^{\ast\ast} = X^{\ast\ast}$
+    \end{itemize}
+    \item The operators $\ast$ give a bujective inclusion-reversing correspondence between closed subsets of $S$ and closed subsets of $T$ wrt to these operators.
+  \end{Properties}
+  \end{bergman}
 
-        So the coefficients of $f$ are in $K^G = k$. Furthermore, $f$ is seperable since all the $\sigma_i\alpha$ are distinct. So every element $\alpha\in K$ is the root of a seperable polynomial of degree $\leq n$ with coeffs in $k$. We also see that this polynomial splits into linear factors in $K$, so $K$ is seperable and normal (hence Galois) over $k$.
+  \section{Examples and Applications}
+  \begin{bergman}
+    Let $K$ be a finite field, say $\F_{p^n}$, recall the Frobenius map is an automorphism in this case, furthermore we recall that this map fixes $\F_p$. Furthermore the Frobenius map has finite order, so by Artin
+    it generates the group $\Gal{\F_{p^n}/\F_{p}}$. Thus each field $\F_{p^n}$ is a Galois extension of $\F_{p}$ with cyclic Galois group, which must have order $[\F_{p^n}, \F_{p}] = n$.
 
-        By lemma~\ref{1.7} we see that $[K\colon k]\leq n$. But recall from chapter $5$, the Galois group of $K$ over $k$ has order $\leq [K\colon k]$. Since $G\subseteq \Gal(K/k)$, but $n = |G| \leq |\Gal(K/k)|\leq [K\colon k]\leq n$, we see that $G = \Gal(K/k)$, and $[K\colon k] = n$. 
-    \end{proof}
- \end{theorem}
-\begin{corollary}
-    Let $K$ be a finite Galois extension of $k$ and let $G$ be its Galois groiup. Then every subgroup of $G$ belongs to some subfield $F$ such that $k\subseteq F\subseteq K$.
-    \begin{proof}
-        Let $H\leq G$, and $F=K^H$, then by Artin $K$ is a finite Galois extension of $F$ and $\Gal{K/F} = H$.
-    \end{proof}
-\end{corollary}
-\begin{bergman}
-    Combining this corollary and theorem~\ref{1.2}, tells us that we have a bijection between the set of subfields of $K$ containing $k$ and the set of subgroups of $G$. i.e, the first assertion in theorem~\ref{main}
+    We can see that for every $m$ dividing $n$, the sugroup generated by the $m$th power of the Frobenius map corresponds to a subfield $\F_{p^m}\subseteq \F_{p^n}$ 
+  \end{bergman}
+  
+  \begin{definition}\index{Galois group}
+    Let $k$ be a field and $f(X)$ a seperable polynomial of degree $\geq 1$ in $k[X]$. Let \[
+        f(X) = (X-\alpha_1)\cdots (X-\alpha_n)  
+    \]
+
+    be its factorization in a splitting field $K$ over $k$. If $G$ is the Galois group of $K$ over $k$, we call $G$ the \textbf{Galois group} of $f$ over $k$. 
+    Since the elements of $G$ permute the roots of $f$, we have an injective homomorphism of $G$ into the symmetric group $S_n$. 
+  \end{definition}
+  \paragraph*{Quadratic extensions}
+  \begin{example}
+    Let $k$ be a field and $a\in k$. If $a$ is not a square in $k$, then the polynomial $X^2-a$ has no root in $k$ and is therefore irreducible.
+  
+    Assume $char k\neq 2$. Let $\alpha$ be a root, this polynomial is separable since $-\alpha\neq \alpha$, and so $k(\alpha)$ is the splitting field, is Galois and it's Galois group is cyclic of order $2$.
+  
+    Conversely, given an extension $K$ of $k$ of degree $2$, there exists $a\in k$ such that $K = k(\alpha)$ and $\alpha^2 = a$. (Indeed since if $x^2 + bx + c = 0\Rightarrow {(x + \frac{b}{2})}^2 = -(\frac{b^2}{4} + c)\in k$, so we let $\alpha = x + \frac{b}{2}$)
+  \end{example}
+
+  \paragraph*{Cubic extensions}
+  \begin{example}
+    Let $k$ be a field not of characteristic $2$ nor $3$. Let \[
+      f(X) = X^3 + aX +b  
+    \]
+    Be any polynomial of degree $3$ can be brought into this form (depressed cubic). Assume that $f$ has no root in $k$. Then $f$ is irreducible. Let $\alpha$ be a root of $f(X)$, Then $[k(\alpha)\colon k] = 3$.
+
+    Let $K$ be the splitting field, since $char k\neq 2,3$, $f$ is separable, so let $G$ be the Galois group. Then $G$ has order $3$ or $6$ since $G$ is a subgroup of the symmetric group $S_3$. In the second case $k(\alpha)$ is not normal over $k$, this is because the corresponding group is the stablizer of $1\in \{1,2,3\}$ in $S_3$ which is not a normal subgroup.
     
-    \
-
-    This is called the \textbf{Fundamental Theorem of Galois Theory}
-\end{bergman}
-
-\begin{remark}
-    This only covers the finite case, if $K$ is an infinite Galois extension of $k$ we need to do more work.
-\end{remark}
-
-Let $K$ be a Galois extension of $k$. Let \[\lambda\colon K\rightarrow \lambda K \text{ be an isomorphism}\]
-Then $\lambda K$ is a Galois extension of $\lambda k$. Let $G$ be the Galois groupnof $K$ over $k$. Then the map\[
-        \sigma\rightarrow \lambda \sigma \lambda^{-1}    
-\] 
-
-Gives a homomorphism of $G$ into $\Gal{\lambda K/\lambda k}$. Furthermore this homomorphism has an iverse given by \[\lambda^{-1}\tau\lambda\rightarrow \tau \]
-
-Therefore these two groups are isomorphic and we write:\[
-    {G(\lambda K/\lambda k)}^\lambda = G(K/k) \text{ or } {G(\lambda K/\lambda k)} = \lambda G(K/k) \lambda^{-1}
-\]
-
-Where $\lambda$ is ``conjugation'' such that\[
-    \sigma^\lambda = \lambda^{-1}\sigma\lambda \text{ where we have the property} {(\sigma^\lambda)}^\omega = \sigma^{\lambda\omega}    
-\]
-\begin{bergman}
-    Note we may write $^\lambda\sigma = \lambda\sigma\lambda^{-1}$, and then $^\lambda(^\omega \sigma) = \lambda(^\omega \sigma)\lambda^{-1} = \lambda\omega \sigma\omega^{-1}\lambda^{-1} = ^{\lambda\omega}\sigma$
-\end{bergman}
-
-
-In particular, let $F$ be an intermediate field, $k\subseteq F\subseteq K$, and let $\lambda\colon F\rightarrow \lambda F$ be an embedding of $F$ in $K$, which we extend to an automorphisms of $K$. Then $\lambda K = K$ and \[
-        \Gal{K/\lambda F}^\lambda = \Gal{K/F}    
-\]
-
-\begin{theorem}\label{1.10}
-    Let $K$ be a Galois extension of $k$ with group $G$. Let $F$ be a subfield, $k\subseteq F\subseteq K$ and let $H=\Gal{K/F}$. Then $F$ is normal over $k$ if and only if $H$ is normal in $G$.
-
-    If $F$ is normal over $k$, then the restriction map $\sigma\rightarrow \sigma|_F$ is a homomorphism of $G$ onto the Galois group of $F$ over $k$, whose kernel is $H$. We thus have \[
-        \Gal{F/k} \simeq G/H    
+    \subparagraph*{How do we test whether the Galois group is the full symmmetric group?}
+    We will consider the discriminant, if $\alpha_1,\alpha_2,\alpha_3$ are the distinct roots of $f(X)$ we let\[
+      \delta = (\alpha_1-\alpha_2)(\alpha_2-\alpha_3)(\alpha_1-\alpha_3) \text{ and }\Delta = \delta^2  
     \]
-\begin{proof}
-    Assume $F$ is normal over $k$, and let $G'$ be its Galois group. The restriction map $\sigma\rightarrow \sigma|_F$ maps $G$ into $G'$. By definition its kernel is $H$.
-
-    \
-
-    Since $F$ is normal over $k$, we know that $\sigma|_F\colon F\rightarrow F$, so this map is a homomorphism so $H$ is the kernel of a hom, so it is normal in $G$.
-
-    Furthermore, any element $\tau\in G'$ extends to an embedding of $K$ in $K^a$, which must be an automorphism of $K$ (since $K$ is normal) so the restriction map is surjective. 
-    So we indeed see that \[
-        G/H \simeq \Gal{F/k} 
-    \] 
-
-    Now assume that $F$ is not normal over $k$. There exists an embedding $\lambda$ of $F$ in $K$ over $k$ which is not an automorphism, i.e. $\lambda F\neq F$. Extend $\lambda$ to an automorphism of $K$ over $k$. The Galois groups $G(K/\lambda F)$ and $G(K/F)$ are conjugate, and they belong to distinct subfields, hence cannot be equal. So $H$ is not normal in $G$.
-\end{proof}
-\end{theorem}
-
-\begin{remark}
-    The above theorem says that if $H\trianglelefteq G$, then $F$ is Galois over $k$. Indeed, since $K$ is Galois over $F$ and Galois over $k$ we have:\[
-        |G| = [K\colon k] = [K\colon F][F\colon k] = |H|[F\colon k]    
-    \] 
-    Recall we are considering finite extensions in this section, so\begin{align*}
-        [F\colon k] &= |G/H|\\
-                    &= |\Gal{F/k}|\\
-                    &= {[F\colon k]}_s
-    \end{align*}  
-    The last equality is true since $F/k$ is a normal extension. So $F/k$ is normal and seperable, so it is a Galois extension.
-\end{remark}
-\begin{definition}\index{Abelian Galois extension}\index{Cyclic Galois extension}
-    A Galois extension $K/k$ is said to be \textbf{aberlian} (resp. \textbf{cyclic}) if its Galois group $G$ is Abelian (resp.~cyclic).
-\end{definition}
-
-\begin{corollary}
-    Let $K/k$ be abelian (resp.~cyclic). If $F$ is an intermediate field, $k\subseteq F\subseteq K$, then $F$ is Galois over $k$ and is abelian (resp.~cyclic).
-    \begin{proof}
-        Let $G(K/F) = H\leq G$, since $G$ is abelian then $H$ is also and so is normal in $G$. So $F$ is Galois over $k$, and $G/H$ is abelian since the quotient of abelian groups is abelian.
-        
-        \
-
-        We replace the word \textit{abelian} with \textit{cyclic} for the proof about cyclic extensions.
-    \end{proof}
-\end{corollary}
-
-\begin{theorem}{\Bergman{Theorem of Natural Irrationalities}}\label{1.12}\\
-    Let $K$ be a Galois extension of $k$, and let $F$ be an arbitrary extension. Assume that $K,F$ are subfields of some other field. Then $KF$ is Galois over $F$, and $K$ is Galois over $K\cap F$. Let $H$ be the Galois group of $KF$ over $F$, and $G$ the Galois group of $K$ over $k$. If $\sigma\in H$ then the restriction of $\sigma$ to $K$ is in $G$ and the map\[
-        \sigma\rightarrow \sigma|_K    
+    If $G$ is the Galois groups and $\sigma\in G$, then $\sigma(\delta) = \pm \delta$. Hence $\sigma$ leaves $\Delta$ fised. Thus $\Delta$ is in the ground field $k$. Furthermore we have seen that \[
+      \Delta = -4a^3-27b^2  
     \]
-    gives an isomorphism  of $H$ on the Galois group of $K$ over $K\cap F$. 
-
-    \begin{proof}
-        Note $KF$ is Galois over $F$ since seperable extensions form a distinguised class of extensions, so $KF/F$ is seperable, and normal extensions remain normal under lifting so $KF/F$ is normal.
-        
-        Also $k\subseteq K\cap F\subseteq K$, so $K$ is Galois over $K\cap F$.
-
-        \
-
-        Now let $\sigma\in H$. The restriction of $\sigma$ to $K$ is an embedding of $K$ over $k$, so is an element of $G$ since $K$ is normal over $k$. So again the map $\sigma\rightarrow \sigma|_K$ is an homomorphism. If $\sigma|_K$  is the identity, then $\sigma$ must be the identity of $KF$
-        (since every element of $KF$ can be expressed as a combination of sums and products and quotients of elements in $K$ and $F$, and since $\sigma$ is in the Galois group of $KF$ over $F$, it also fixes $F$).
-
-        So our homomorphism $\sigma\rightarrow \sigma|_K$ is injective. Let $H'$ be its image. Then $H'$ leaves $K\cap F$ fixed. Conversely, if an element $\alpha\in K$ is fixed under $H'$, we see that $\alpha$ is also fixed under $H$ so $\alpha\in F$ and $\alpha\in K\cap F$. So $K\cap F$ is the fixed field. 
-
-        If $K$ is finite over $k$, or $KF$ is finite over $F$, then by theorem~\ref{1.8}, $H'$ is the Galois group of $K$ over $K\cap F$.
-    \end{proof}
-\[
-\begin{tikzcd}
-    &KF \arrow[rd, "H", dash]&\\
-    && F \arrow[ddl, dash]\\
-    K \arrow[uur, dash] \arrow[dr, dash]&&\\
-    &K\cap F \arrow[d,dash]&\\
-    &k&
-\end{tikzcd}
-\]
-\[
-    \text{Diagram illustrating the theorem}
-    \]
-It is suggestive to think of the opposite sides of the parallelogram as being equal, under the particular hypotheses of the preceding theorem. \begin{bergman}
-    The preceding theorem basically says that if one of the lower edges of the parallelogram is a Galois extension then the parallel upper edge is also Galois, with the same Galois group.
-\end{bergman}
-\end{theorem}
-
-\begin{corollary}
-    Let $K$ be a finite Galois extension of $k$. Let $F$ be an arbitrary extension of $k$. Then $[KF\colon F]$ divides $[K\colon k]$.
-
-    \begin{proof}
-        In the notation from above, the order of $H$ divides the order of $G$, since $\Gal{K/K\cap F}$ is a subgroup of $\Gal{K/k}$. The result follows.
-    \end{proof}
-\end{corollary}
-\begin{remark}\textbf{WARNING}
-    The assertion of the corollary is not usually valid if $K$ is not Galois over $k$. 
-
-    \
-
-    Let $\alpha = \sqrt[3]{2}$ be the real cube root of $2$, and let $\zeta$ be a primitive third root of unity, say\[
-        \zeta = \frac{-1 + \sqrt{-3}}{2}
-    \]
-    and let $\beta = \zeta\alpha$. Let $K = \Q(\beta)$ and $F=\Q(\alpha)$, since $\Q(\alpha)\subseteq \R$ we see that $\Q(\beta)\neq \Q(\alpha)$.
-
-    \
-
-    So $K\cap F$ is a subfield of $K$ whose degree over $\Q$ divides $3$, since $3 = [F\colon \Q] = [F\colon K\cap F][K\cap F \colon \Q]$ and $2 = [K\colon \Q] = [K\colon E\cap F][K\cap F \colon \Q]$, so \[
-        [K\cap F \colon \Q] = 1
-    \] 
-    But $KF = \Q(\alpha, \beta) = \Q(\alpha, \sqrt{-3})$, so $[KF\colon F] = 2$.
-
-    \begin{bergman}
-        If we look back at our diagram, this example shows is that even the equality of degrees between the opposite sides can fail if the lower edge is not normal. Moreover, each upper edge of the parallelogram is an extension of degree $2$, and every quadratic extension is normal. So the top two edges are normal, but the opposite edges are not in any sense ``equal''.
-    \end{bergman}
-\end{remark}
-\begin{theorem}\label{1.14}
-    Let $K_1$ and $K_2$ be Galois extensions of a field $k$, with Galois groups $G_1$ and $G_2$ respectively. Assume $K_1,K_2$ are subfields of some field. Then $K_1K_2$ is Galois over $k$. Let $G$ be its Galois group. Map $G\rightarrow G_1\times G_2$ by restriction:\[
-        \sigma \mapsto (\sigma|_{K_1}, \sigma|_{K_2})    
-    \]
-    The map is injective, if $K_1\cap K_2 = k$ then the map is an isomorphism.
-    \begin{proof}
-        $K_1K_2$ is Galois over $k$ since normality and seperability are preserved by compositum. Furthermore our map is clearly and homomorphism of $G$ into $G_1\times G_2$. If $\sigma\in G$ induces the identity on $K_1$ and $K_2$ then it induces the identity on their compositum so our map is injective. Assume that $K_1\cap K_2 = k$ then by theorem~\ref{1.12}, given an element $\sigma\in G_1$ there is an element $\sigma$ of the Galois group $K_1K_2$ over $K_2$, which induces $\sigma_1$ on $K_1$. 
-
-        This $\sigma$ is in $G$ and induces the identity on $K_2$. Hence $G_1\times \{e_2\}$ is contained in the image of our homomorphism. Similarly for $\{e_1\}\times G_2$. Hence their product, $G_1\times G_2$, is contained in the image. 
-    \end{proof}
-    \[
-\begin{tikzcd}
-    &K_1K_2 \arrow[rd, dash] \arrow[ld,  dash]&\\
-    K_1 \arrow[dr, dash]&& K_2 \arrow[dl, dash]\\
-    &K\cap F \arrow[d,dash]&\\
-    &k&
-\end{tikzcd}
-\]
-\[
-    \text{Diagram illustrating the theorem}
-\]
- \end{theorem}
-
-\begin{corollary}
-    Let $K_1,\ldots,K_n$ be Galois extensions of $k$ with Galois groups $G_1,\ldots,G_n$. Assume that $K_{i+1}\cap (K_1\cdots K_i) = k$ for each $i=1,\ldots,n-1$. Then the Galois group of $K_1\cdots K_n$ is isomorphic to the product $G_1\times \cdots\times G_n$ in the natural way.
-    \begin{proof}
-        Induction, using the previous theorem.
-    \end{proof}
-\end{corollary}
-\begin{corollary}
-    Let $K$ be a finite Galois extension of $k$ with group $G$, and assume that $G$ can be written as a direct product \[
-        G = G_1\times\cdots\times G_n    
-    \]
-    Let $K_i$ be the fixed field of \[
-        G_1\times \cdots \times G_{i-1}\times \{1\}\times G_{i+1}\times \cdots\times G_n    
-    \]
-    Then $K_i$ is Galois over $k$ and $K_{i+1}\cap (K_1\cdots K_i) = k$. Furthermore $K = K_1\cdots K_n$
-    \begin{proof}
-        Recall the compositum of all $K_i$ belongs to the intersection of their corresponding groups, which is the identity. Hence the compositum is equal to $K$. Each factor of $G$ is normal in $G$, so $K_i$ is Galois over $k$. Recall the intersection of normal extensions belongs to the product of their Galois groups. And it is clear that \[
-            K_{i+1}\cap (K_1\cdots K_i) = k    
-        \]
-    \end{proof}
-\end{corollary}
-\begin{theorem}
-    Assume all fields are contained in some common field.\begin{enumerate}
-        \item If $K,L$ are abelian over $k$, so is the composite $KL$.
-        \item If $K$ is abelian over $k$ and $E$ is any extension of $k$, then $KE$ is abelian over $E$.
-        \item If $K$ is abelian over $k$ and $K\supseteq E\supseteq k$, where $E$ is an intermediate field, then $E$ is abelian over $k$ and $K$ is abelian over $E$
-    \end{enumerate}
-    \begin{proof}
-        Immidiate theorem~\ref{1.12} and theorem~\ref{1.14}
-    \end{proof}
-\end{theorem}
-\begin{definition}\index{maximum abelian extension}
-    If $k$ is a field, the composite of all abelian extensions of $k$ in a given algebraic closure $k^a$ is called the \textbf{maximum abelian extension} of $k$ and is denoted $k^{ab}$.
-\end{definition}
-
-\begin{bergman}
-    Lang calls the notations of $k^a$, $k^s$ and $k^{ab}$ ``functiorial with respect to the ideas''. It was one of his slogans. He may be saying that the notation should reflect ideas in something like the way the functiorial notation does (i.e. with functors we write $F(a)\colon F(X)\rightarrow F(Y)$, if $a\colon X\rightarrow Y$ induces a map $F(x)\rightarrow F(Y)$ instead of $a^\ast$ as we would have in the pre-category theory days). 
-    The use of $k^a$, $k^s$ and $k^{ab}$ rather than arbitrary bars and tildas does this.
-\end{bergman}
-\section{Examples and Applications}
-
+  \end{example}
 \printindex
 \end{document}
