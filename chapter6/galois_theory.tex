@@ -86,6 +86,29 @@
     If $G$ is the Galois groups and $\sigma\in G$, then $\sigma(\delta) = \pm \delta$. Hence $\sigma$ leaves $\Delta$ fised. Thus $\Delta$ is in the ground field $k$. Furthermore we have seen that \[
       \Delta = -4a^3-27b^2  
     \]
+	The set of $\sigma$ in $G$ which leave $\delta$ fixed is precisely the set of even permutations.
+	\begin{bergman}
+		Let us develop formally the corresponding result for equations of arbitrary degree. Note that $D$ and $\delta$ are the polynomials 
+		\begin{align*}
+			\delta(t) &= \prod_{i<j}(t_i-t_j)\\
+			D = D(s_1,\ldots,s_n)&= \prod_{i<j}{(t_i-t_j)}^2
+		\end{align*}
+    \begin{lemma}
+      Let $n$ be a positive integer, and let $D\in \Z[X_1,\ldots,X_n]$ be the discriminant polynomial. That is the unique polynomial such that in the polynomial ring $\Z[t_1,\ldots,t_n]$, if one writes $s_i$ for the $ith$ elementary symmetric polynomial in the $t_i$, we have \[
+          \prod_{i<j} {(t_i-t_j)}^2 = D(s_1,\ldots,s_n)  
+      \]
+
+      For any field $k$ not of characteristic $2$ and any seperable monic polynomial $f = X^n + a_{n-1}X^{n-1}+\cdots + a_0$, if we denote by $E$ the splitting field of $f$ and by $\alpha_1,\ldots,\alpha_n$ the roots of $f$ in $E$, then TFAE:\begin{enumerate}[label = (\alph*)]
+        \item $\Gal{E/k}$, regarded as a group of permutations of $\alpha_1,\ldots,\alpha_n$ lies in the alternating group $A_n$, i.e. acts by even permutations on these roots.
+        \item The element $\delta(\alpha) = \prod_{i<j}(\alpha_i-\alpha_j)$ of $E$ lies in $k$.
+        \item The element $D(a_{n-1},\ldots,a_0)\in k$ is  asquare in $k$
+      \end{enumerate}
+      Hence the fixed field of the group of elements of $\Gal{E/k}$ which act by even permutations on the roots of $f$ is $k(\delta(\alpha)) = k({D(a_{n-1},\ldots,a_0)}^{1/2})$.
+    \end{lemma}
+    \begin{proof}
+      
+    \end{proof}
+	\end{bergman}
   \end{example}
 \printindex
 \end{document}
