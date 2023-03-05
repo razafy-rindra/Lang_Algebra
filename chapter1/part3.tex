@@ -1,0 +1,179 @@
+\paragraph*{Part 3: Some operations}
+
+\
+
+\begin{exercise}
+    Let $G$ be a finite group operating on a finite set $S$ with $\#(S)\geq 2$. Assume that there is only one orbit. Prove that there exists an element $x\in G$ which has no fixed point, i.e. \[xs \neq s \text{ for all }s\in S\]
+
+    \begin{proof}
+    Assume that for all $x\in G$, there is a $s\in S$ such that $xs = s$.
+
+    For each $x\in G$ we let $f(x) = $ number of elements $s\in S$ such that $xs = s$. We will use the formula that will be proved in question 19: \begin{align}
+    1 = \text{# Orbits of }G\text{ in }S &= \frac{1}{|G|}\sum_{x\in G}f(x)\\
+    \therefore |G| &= |S| + \sum_{x\in G\setminus\{e\}}f(x)\\
+    &\geq |S| + \sum+{G\setminus\{e\}} 1 \text{ since by assumption every element has a fixed point}\\
+    &\geq 2+|G|-1 = |G|+1
+.\end{align}
+Which is a contradiction! Therefore there must be an element $x\in G$ which has no fixed point.
+    \end{proof}
+
+\end{exercise}
+
+\begin{exercise}
+    Let $H$ be a proper subgroup of a finite group $G$. Show that $G$ is not the union of all the conjugates of $H$.
+    \begin{proof}
+    Let $|G| = m|H|$, where $m> 1$. Now let $S = \{x_1Hx_1^{-1},\ldots,x_r H x_r^{-1}\}$ be the set of conjugates of $H$. Recall that 
+
+Since $e\in x_i H x_i^{-1}$, we see that:
+So we see that  \[
+    |\bigcup_i x_i H x_i^{-1}| \leq \sum_i |x_i H x_i^{-1}| - r +1 = \sum_i |H| - r + 1 = r|H| - r + 1
+.\]
+
+Now by theorem we know that $r = |G\colon N_H| = \frac{|G|}{|N_H|}$, where  $N_H$ is the normalizer of $H$, since $H\leq G$ it is closed under multiplication so $hHh^{-1} = H$, for  $h\in H$
+so  $H\subseteq N_H$. So we have  \[
+    r = \frac{|G|}{|N_H|}\leq \frac{|G|}{|H|} = m. 
+.\]
+
+Therefore we have \[
+    |\bigcup_i x_i H x_i^{-1}| \leq r|H| - r + 1 \leq m|H| - (m-1) < m|H| = |G| \text{ since }m>1.
+.\]
+
+So $G$ can't be the union of all the conjugates of $H$.
+
+
+\end{proof}
+\end{exercise}
+
+
+\begin{exercise}
+    Let $X,Y$ be finite sets and $C$ be a subset of $X\times Y$. For $x\in X$ let \[\varphi(x) = \text{ number of elements }y\in Y\text{ such that }(x,y)\in C\]
+    Verify that \[
+    |C| = \sum_{x\in X}\varphi(x)    
+\]
+    \begin{proof}
+    Let $X = \{x_1,\ldots,x_n\}$ and $Y = \{y_1,\ldots,y_m\}$. Let $I = \{i\in \{1,\ldots, n\} \mid \exists y\in Y \text{ such that } (x_i,y)\in C\}$. 
+    Now for each $i\in I$ we let  $C_i = \{(x,y)\in C \mid x = x_i\}$. So note that the $C_i\cap C_j = \emptyset$ for all $j\neq i$ and that  $\bigcup_{i\in I} C_i = C$.
+    Finally we notice that $|C_i| = \text{ number of }y\in Y\text{ such that } (x_i,y)\in C = \varphi(x_i)$
+    Putting all of this together we have: \begin{align*}
+    \sum_{x\in X}\varphi(x) &= \sum_{i\in I}\varphi(x_i) = \sum_{i\in I}|C_i| = |\bigcup_{i\in I}C_i| = |C|
+\end{align*}
+    
+\end{proof}
+\end{exercise}
+\begin{exercise}
+    \begin{proof}
+    Let $S = \{s_1,\ldots,s_n\}$ and $T = \{t_1,\ldots,t_m\}$
+    Recall a map from  $S$ to $T$ is defined by where the $s_i$ maps to for each $i$. There are $m$ possible values that each $s_i$ can be mapped to. So there are  $\underbrace{m\cdot m \cdots m}_{n\text{ times}} = m^n = |T|^{|S|}$
+    maps from $S$ to $T$.
+\end{proof}    
+\end{exercise}
+
+\begin{exercise}
+    \begin{enumerate}[label = (\alph*)]
+\item 
+\begin{proof}
+    Recall that since the orbits partition $S$ we have $Gs = Gt$ for all $t\in Gs$. So we have:  \[
+\sum_{t\in Gs}\frac{1}{|Gt|} = \sum_{t\in Gs}\frac{1}{|Gs|} = \frac{|Gs|}{|Gs|} = 1
+.\]
+\end{proof}
+
+   
+\item 
+    \begin{proof}
+    Let $C = \{(x,s)\in G\times s \mid xs = s\}$, by question 17 we know that: \[
+    \sum_{x\in G}f(x) = |C|
+.\]
+But furthermore if we let for all $s\in S$, $\varphi(s) = |\{x\in G\mid (x,s)\in C\}| = |\{x\in G\mid xs=s\}| = G_s$ then by question 17:
+\[
+\sum_{s\in S} |G_s| = \sum_{s\in S}\varphi(s) = |C|
+.\]
+We let $\{s_i\}_{i\in I}$ be the distinct represtatives for the orbits of $G$ in $S$.
+
+But we have: \begin{align*}
+\sum_{s\in S}|G_s| &= \sum_{s\in S}\frac{|G|}{|Gs|}\\
+&= |G|\sum_{s\in S}\frac{1}{|G_s|}\\
+&=|G|\sum_{i\in I}\sum_{t\in Gs_i}\frac{1}{|Gt|}\\
+&=|G|\sum_{i\in I}1 = |G|\cdot \#\text{ of distinct orbits of } G\text{ in }S
+\end{align*}
+
+
+Putting this all together we get: \[
+    \frac{1}{|G|}\sum_{x\in G}f(x) = \#\text{ of distinct orbits of } G\text{ in }S
+.\]
+    \end{proof}
+\end{enumerate}
+   
+\end{exercise}
+\begin{exercise}
+\begin{proof}
+    Let $P$ act on $A$ by conjugation. By the orbit-stabilizer theorem \[
+    |P| = |A\cap Z(P)| + \sum |P\colon P_x| \text{ where the sum is over all }x\text{ such that }|P\colon P_x|>1
+.\]
+This is indeed true since \[
+    x\in A\cap Z(P) \iff gx = xg \text{ for all }g\in P \text{ and }x\in A \iff P_x = P \iff |P\colon P_x| = 1
+.\]
+
+But then we have since if $|P\colon P_x|>1$ then it is divisible by $p$, then we have $|A\cap Z(P)| = 0\pmod{p}$.
+So we have $|A\cap Z(P)| \neq 1$, but since $|A| = p$ this implies that  $A\cap Z(P) = A$, so  $A\subseteq Z(P)$.
+
+\end{proof}
+
+\end{exercise}
+\begin{exercise}
+\begin{proof}
+    Since $P_H$ is a $p$-Sylow subgroup of $H$ it is a $p$-subgroup of $G$. So there exists a $p$-Sylow subgroup, $Q$, of $G$ such that $P_H\subseteq Q$.
+    
+    \
+
+    Now since $Q\cap H\leq Q$, we see that  $Q\cap H$ is a $p$-group contained in $H$, so  $|Q\cap H|\leq |P_H|$ but since $P_H\subseteq Q\cap H$ we have
+ $|Q\cap H| = |P_H|$.
+
+ \
+
+ So  $|Q\cap H|$ is a $p$-Sylow subgroup of $H$, so there exists $g\in H$ such that $g(Q\cap H)g^{-1} = P_H$. But notice that since $g\in H$ we have 
+ $g(Q\cap H)g^{-1} = (gQg^{-1})\cap H$. Let $P = gQg^{-1}$, it is a $p$-Sylow subgroup of $G$ such that  \[
+     P_H = P\cap H
+ .\]
+ 
+\end{proof}
+\end{exercise}
+\begin{exercise}
+    \begin{proof}       
+    Recall that since $H$ is a p-subgroup of $G$, it is contained in a p-Sylow subgroup, say $P\subseteq G$.
+    Now let $Q$ be any other p-Sylow subgroup of  $G$, then there exists  $g\G$ such that  $gPg^{-1} = Q$. But since $H\trianglelefteq G$ we have \[
+    H = gHg^{-1}\subseteq gPg^{-1} = Q
+.\]
+  $\therefore$  $H$ is contained in $Q$, since $Q$ was an arbitrary p-Sylow subgroup of  $G$,  $H$ is contained in all p-Sylow groups. 
+
+    \end{proof}
+\end{exercise}
+\begin{exercise}
+\begin{enumerate}[label = (\alph*)]
+    Let $|G| = p^k m$, where  $p\nmid m$.
+    \item 
+    \begin{proof}
+    Assume that $P'\subseteq N(P)$. Note that $|N(P)| = p^k n$, where $p\nmid n$, so $P'$ is a $p$-Sylow subgroup of $N(P)$. 
+    But we also know that $P$ is a $p$-Sylow subgroup of $N(P)$, and since all $p$-Sylow groups are conjugate
+    there is $g\in N(P)$ such that  \[
+    gPg^{-1} = P'
+.\]
+So since $g\in N(P)$, $P = gPg^{-1} = P'$.
+    \end{proof}
+    \item
+    \begin{proof}
+    $P'\subseteq N(P') = N(P)$, so by the previous question  $P'= P$.
+\end{proof}
+\item 
+\begin{proof}
+  It is clear that $N(P)\subseteq N(N(P))$. So let $g\in N(N(P))$ and $n\in N(P)$.
+  On the one hand since $gng^{-1}\in gN(P)g^{-1} = N(P)$ we know that \[
+  gng^{-1}Pgn^{-1}g^{-1} = P
+.\]
+On the other hand by (a) we know that $g^{-1}Pg = P$ and since $n\in N(P)$ we have:  \[
+    P = gn(g^{-1}Pg)n^{-1}g^{-1} = g(nPn^{-1})g^{-1} = gPg^{-1}
+.\]
+Therefore $g\in N(P)$ so we have  $N(N(P))\subseteq N(P) \Rightarrow N(N(P))= N(P)$
+\end{proof}
+\end{enumerate}
+\end{exercise}
+
